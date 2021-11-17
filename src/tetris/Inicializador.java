@@ -24,13 +24,23 @@ public class Inicializador {
         ventanaJuego.setVisible(true);
 
         
-        Panel panelJuego = new Panel(anchoVentana, largoVentana);
+        Panel panel= new Panel (anchoVentana, largoVentana);
 
-        ventanaJuego.add(panelJuego);
+        ventanaJuego.add(panel);
 
       
         ventanaJuego.pack();
-
+        
+        ventanaJuego.addMouseMotionListener(panel);
+        
+        panel.run();
+        
+        Thread hilo = new Thread(panel);
+        
+        hilo.start(); // ejecuta run en forma de hilo
+        
+        
+        
 	}
 
 }
