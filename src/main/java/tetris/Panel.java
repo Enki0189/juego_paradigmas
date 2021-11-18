@@ -3,6 +3,12 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import javax.swing.JPanel;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -11,13 +17,15 @@ import javax.swing.JPanel;
 import javax.swing.event.MouseInputListener;
 
 
-public class Panel extends JPanel implements Runnable, MouseMotionListener{
+public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyListener {
 
 	private static final long serialVersionUID = 1L;
 	private int anchoJuego;
 	private int largoJuego;
 	private int posicionX;
 	private int posicionY;
+	private int velocidadX;
+    private int velocidadY;
 
 	public Panel(int anchoJuego, int largoJuego) {
 		this.anchoJuego = anchoJuego;
@@ -65,15 +73,15 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener{
 	}
 	
 	private void actualizarAmbiente() {
-        posicionX++;
-        posicionY++;
+		posicionX=posicionX+velocidadX;
+        posicionY=posicionY+velocidadY;
     }
 
 
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -81,6 +89,37 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener{
 	public void mouseMoved(MouseEvent e) {
 		this.posicionX = e.getX();
 		this.posicionY = e.getY();
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+        if (arg0.getKeyCode() == 39) {
+            velocidadX = 5;
+        }
+        if (arg0.getKeyCode() == 37) {
+            velocidadX =-5;
+        }
+        
+        if (arg0.getKeyCode() == 38) {
+            velocidadY = -5;
+        }
+        
+        if (arg0.getKeyCode() == 40) {
+            velocidadY = 5;
+        }
+    }
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		 velocidadX = 0;
+	     velocidadY = 0;
 		
 	}
 	
