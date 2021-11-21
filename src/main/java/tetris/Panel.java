@@ -1,20 +1,13 @@
  package tetris;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
-import javax.swing.JPanel;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
-import javax.swing.event.MouseInputListener;
 
 
 public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyListener {
@@ -64,10 +57,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	@Override
 	protected void paintComponent (Graphics g) {
 		super.paintComponent(g);
-		g.setColor(Color.BLUE);
-		g.fillRect(70,70,70,70);
-		g.setColor(Color.RED);
-		g.fillRect(70,20,70,20);
+		
 		
 	
 	}
