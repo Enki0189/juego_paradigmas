@@ -12,7 +12,7 @@ public class Inicializador {
         
         System.setProperty("sun.java2d.opengl", "true");
         
-        JFrame ventanaJuego = new JFrame("Mi Juego");
+        JFrame ventanaJuego = new JFrame("Tetris");
 
        
         ventanaJuego.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
