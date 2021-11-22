@@ -1,5 +1,6 @@
  package tetris;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -57,6 +58,16 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	@Override
 	protected void paintComponent (Graphics g) {
 		super.paintComponent(g);
+		Cuadrado cuadrado = new Cuadrado (0, 0, 0, 0, Color.blue);
+		cuadrado.dibujarse(g);
+		FiguraL figuraL = new FiguraL (75, 25, 0, 0, Color.red);
+		figuraL.dibujarse(g);
+		FiguraI figuraI = new FiguraI (0, 75, 0, 0, Color.orange);
+		figuraI.dibujarse(g);
+		FiguraT figuraT = new FiguraT (25, 150, 0, 0, Color.green);
+		figuraT.dibujarse(g);
+		FiguraZ figuraZ = new FiguraZ (75, 150, 0, 0, Color.pink);
+		figuraZ.dibujarse(g);
 		
 		
 	
