@@ -3,33 +3,60 @@ package tetris;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public abstract class Figura implements FiguraMetodos {
+public abstract class Figura  {
 
-	private int posicionX;
-	private int posicionY;
-	private int velocidadX;
-	private int velocidadY;
-	private int ancho;
-	private int largo;
-	private Color color;
-	protected static final int ANCHO_ELEMENTO_BASICO = 25;
-	protected static final int LARGO_ELEMENTO_BASICO = 25;
-
-	public Figura(int posicionX, int posicionY, int velocidadX, int velocidadY, Color color) {
+	private static final int ANCHO_CELDA = 25;
+	private static final int LARGO_CELDA = 25;
+	private String color;
+	protected int [][] matrizFigura;
+	protected int posicionX;
+	protected int posicionY;
+	private ConversoDeImagen conversoDeImagen;
+	
+	public Figura(int posicionX, int posicionY, String color, ConversoDeImagen conversoDeImagen) {
 		this.posicionX = posicionX;
 		this.posicionY = posicionY;
-		this.velocidadX = velocidadX;
-		this.velocidadY = velocidadY;
+		this.color = color;
+		matrizFigura = new int[4][4];
+		this.conversoDeImagen = conversoDeImagen;
+	}
+	
+	public void dibujarse(Graphics graphics) {
+		for(int i = 0; i < matrizFigura.length ; i++) {
+			for(int j = 0;  j < matrizFigura[i].length; j++) {
+				if(matrizFigura[i][j] != 0) {
+					graphics.setColor(Color.GREEN);
+					int posx = (posicionX + j) * ANCHO_CELDA;
+					int posy = (posicionY + i) * LARGO_CELDA;
+					graphics.drawImage(conversoDeImagen.getImagen(this.color), posx, posy, ANCHO_CELDA, LARGO_CELDA, null);
+				}
+			}
+		}
+	}
+	
+	
+	public void figuraRotar() {
+		    int tamanio = matrizFigura.length;
+		    int[][] nuevaMatriz = new int[tamanio][tamanio];
+
+		    for (int x=0;x<tamanio;x++) {
+		        for (int y=0;y<tamanio;y++) {
+		            nuevaMatriz[y][tamanio-1-x] = matrizFigura[x][y];
+		        }
+		    }
+		    matrizFigura = nuevaMatriz;
+	}
+		
+	
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
 		this.color = color;
 	}
 
-	protected void dibujarElementoBasico(Graphics graphics, int posX, int posY) {
-		graphics.setColor(getColor());
-        graphics.fillRect(posX, posY, ANCHO_ELEMENTO_BASICO, LARGO_ELEMENTO_BASICO);
-        graphics.setColor(Color.black);
-        graphics.drawRect(posX, posY, ANCHO_ELEMENTO_BASICO, LARGO_ELEMENTO_BASICO);
-	}
-	
 	public int getPosicionX() {
 		return posicionX;
 	}
@@ -46,45 +73,17 @@ public abstract class Figura implements FiguraMetodos {
 		this.posicionY = posicionY;
 	}
 
-	public int getVelocidadX() {
-		return velocidadX;
-	}
-
-	public void setVelocidadX(int velocidadX) {
-		this.velocidadX = velocidadX;
-	}
-
-	public int getVelocidadY() {
-		return velocidadY;
-	}
-
-	public void setVelocidadY(int velocidadY) {
-		this.velocidadY = velocidadY;
-	}
-
-	public int getAncho() {
-		return ancho;
-	}
-
-	public void setAncho(int ancho) {
-		this.ancho = ancho;
-	}
-
-	public int getLargo() {
-		return largo;
-	}
-
-	public void setLargo(int largo) {
-		this.largo = largo;
-	}
-
-	public Color getColor() {
-		return color;
-	}
-
-	public void setColor(Color color) {
-		this.color = color;
+	public int[][] getMatrizFigura() {
+		return matrizFigura;
 	}
 	
-
+	public void imprimirMatriz() {
+		for(int i = 0; i < matrizFigura.length; i ++) {
+			for(int j = 0; j < 4; j ++) {
+				System.out.print(matrizFigura[i][j]);
+			}
+			System.out.println();
+		}
+	}
+		
 }

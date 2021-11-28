@@ -6,7 +6,7 @@ import javax.swing.WindowConstants;
 public class Inicializador {
 
 	public static void main(String[] args) {
-		
+				
 		int anchoVentana = 800;
         int largoVentana = 600;
         
