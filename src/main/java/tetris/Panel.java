@@ -26,7 +26,11 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		this.anchoJuego = anchoJuego;
 		this.largoJuego = largoJuego;
 		conversoDeImagenes = new ConversoDeImagen("src/main/resources/imagenes/");
-		figura = new FiguraL (2, 2, "NARANJA", conversoDeImagenes);
+		//figura = new FiguraL (2, 2, "NARANJA", conversoDeImagenes);
+		figura = new FiguraT (2, 2, "VIOLETA", conversoDeImagenes);
+		/*for (int i = 1; i < 4; i++) {
+			
+		}*/
 	}
 
 	@Override
@@ -35,7 +39,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
             actualizarAmbiente();
             repintar();
             esperar(1000);
-            figura.figuraRotar();
+            //figura.figuraRotar();
             figura.setPosicionY(figura.getPosicionY() + 1);
         }
 		
@@ -68,6 +72,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	private void actualizarAmbiente() {
 		posicionX=posicionX+velocidadX;
         posicionY=posicionY+velocidadY;
+        figura.moverse();
     }
 
 
@@ -87,24 +92,24 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		
+		/*if (e.getKeyCode() == KeyEvent.VK_UP) {
+        	figura.figuraRotar();
+        	System.out.println("rotar");
+        }*/
 	}
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-        if (arg0.getKeyCode() == 39) {
-            velocidadX = 5;
+        if (arg0.getKeyCode() == KeyEvent.VK_RIGHT) {
+           figura.posicionX++;
         }
-        if (arg0.getKeyCode() == 37) {
-            velocidadX =-5;
-        }
-        
-        if (arg0.getKeyCode() == 38) {
-            velocidadY = -5;
+        if (arg0.getKeyCode() == KeyEvent.VK_LEFT) {
+        	figura.posicionX--;
         }
         
-        if (arg0.getKeyCode() == 40) {
-            velocidadY = 5;
+        if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
+        	//figura.velocidadY++;
+        	figura.setPosicionY(figura.getPosicionY() + 2);
         }
         
         if (arg0.getKeyCode() == KeyEvent.VK_UP) {

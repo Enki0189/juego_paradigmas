@@ -11,11 +11,15 @@ public abstract class Figura  {
 	protected int [][] matrizFigura;
 	protected int posicionX;
 	protected int posicionY;
+	protected int velocidadX;
+	protected int velocidadY;
 	private ConversoDeImagen conversoDeImagen;
 	
 	public Figura(int posicionX, int posicionY, String color, ConversoDeImagen conversoDeImagen) {
 		this.posicionX = posicionX;
 		this.posicionY = posicionY;
+		this.velocidadX = velocidadX;
+		this.velocidadY = velocidadY;
 		this.color = color;
 		matrizFigura = new int[4][4];
 		this.conversoDeImagen = conversoDeImagen;
@@ -85,5 +89,10 @@ public abstract class Figura  {
 			System.out.println();
 		}
 	}
+	
+	public void moverse() {
+        posicionX = posicionX + velocidadX;
+        posicionY = posicionY + velocidadY;
+    }
 		
 }

@@ -33,6 +33,10 @@ public class Inicializador {
         
         ventanaJuego.addMouseMotionListener(panel);
         
+        //faltaba esta linea para que lea las teclas
+        ventanaJuego.addKeyListener(panel);
+        
+        
         panel.run();
         
         Thread hilo = new Thread(panel);
