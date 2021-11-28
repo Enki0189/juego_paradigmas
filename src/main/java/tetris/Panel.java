@@ -1,6 +1,5 @@
  package tetris;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -20,11 +19,14 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	private int posicionY;
 	private int velocidadX;
     private int velocidadY;
+    Figura figura;
+    private ConversoDeImagen conversoDeImagenes;
 
 	public Panel(int anchoJuego, int largoJuego) {
 		this.anchoJuego = anchoJuego;
 		this.largoJuego = largoJuego;
-		
+		conversoDeImagenes = new ConversoDeImagen("src/main/resources/imagenes/");
+		figura = new FiguraL (2, 2, "NARANJA", conversoDeImagenes);
 	}
 
 	@Override
@@ -32,7 +34,9 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		while (true) {
             actualizarAmbiente();
             repintar();
-            esperar(10);
+            esperar(1000);
+            figura.figuraRotar();
+            figura.setPosicionY(figura.getPosicionY() + 1);
         }
 		
 	}
@@ -58,19 +62,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	@Override
 	protected void paintComponent (Graphics g) {
 		super.paintComponent(g);
-		Cuadrado cuadrado = new Cuadrado (0, 0, 0, 0, Color.blue);
-		cuadrado.dibujarse(g);
-		FiguraL figuraL = new FiguraL (75, 25, 0, 0, Color.red);
-		figuraL.dibujarse(g);
-		FiguraI figuraI = new FiguraI (0, 75, 0, 0, Color.orange);
-		figuraI.dibujarse(g);
-		FiguraT figuraT = new FiguraT (25, 150, 0, 0, Color.green);
-		figuraT.dibujarse(g);
-		FiguraZ figuraZ = new FiguraZ (75, 150, 0, 0, Color.pink);
-		figuraZ.dibujarse(g);
-		
-		
-	
+		figura.dibujarse(g);
 	}
 	
 	private void actualizarAmbiente() {
@@ -95,7 +87,6 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -114,6 +105,10 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
         
         if (arg0.getKeyCode() == 40) {
             velocidadY = 5;
+        }
+        
+        if (arg0.getKeyCode() == KeyEvent.VK_UP) {
+        	figura.figuraRotar();
         }
     }
 
