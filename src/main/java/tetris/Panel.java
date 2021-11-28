@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
+import javax.sound.sampled.Clip;
 import javax.swing.JPanel;
 
 
@@ -21,6 +22,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
     private int velocidadY;
     Figura figura;
     private ConversoDeImagen conversoDeImagenes;
+    private Clip music;
 
 	public Panel(int anchoJuego, int largoJuego) {
 		this.anchoJuego = anchoJuego;
@@ -31,6 +33,11 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		/*for (int i = 1; i < 4; i++) {
 			
 		}*/
+        music = ImageLoader.LoadSound("/Tetris_theme.wav");
+		
+		
+		
+		music.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 
 	@Override
