@@ -18,6 +18,7 @@ public class ImageLoader {
 		return null;
 		
 	}
+	
 	public static Clip LoadSound(String direction){
 		try{
 			Clip clip = AudioSystem.getClip();
