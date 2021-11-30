@@ -10,6 +10,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.sound.sampled.Clip;
 import javax.swing.JPanel;
@@ -30,8 +36,13 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
     private int velocidadY;
     Figura figura;
     private ConversoDeImagen conversoDeImagenes;
+
     private Clip music;
     private Image pantallaBienvenida = ImageLoader.loadImage("/tetrisInicio.png");
+    private ArrayList<Figura> listaDeFiguras = new ArrayList<>();
+    //private boolean figLlegoAbajo = false;
+    
+
 
 	public Panel(int anchoJuego, int largoJuego) {
 		this.pantalla = WELCOME_SCREEN;
@@ -39,6 +50,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		this.largoJuego = largoJuego;
 		conversoDeImagenes = new ConversoDeImagen("src/main/resources/imagenes/");
 		//figura = new FiguraL (2, 2, "NARANJA", conversoDeImagenes);
+
 		figura = new FiguraT (2, 2, "VIOLETA", conversoDeImagenes);
 		/*for (int i = 1; i < 4; i++) {
 			
@@ -68,6 +80,40 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		g2d.drawRect(60, largoJuego - 565, anchoJuego - 130, 50);
 		String mensaje = "Presiona la Barra espaciadora para Iniciar";
 		g2d.drawString(mensaje, anchoJuego - 430, 45);
+
+		//figura = new FiguraT (2, 2, "VIOLETA", conversoDeImagenes);
+		//figura = new FiguraZ (2, 2, "ROJO", conversoDeImagenes);
+		cargarListaDeFiguras();
+		figura = crearUnaFigura();
+		
+	}
+	
+	private void cargarListaDeFiguras() {
+		listaDeFiguras.add(new FiguraL(2, 2, "VERDE", conversoDeImagenes));
+		listaDeFiguras.add(new FiguraI(2, 2, "AZUL", conversoDeImagenes));
+		listaDeFiguras.add(new FiguraZ(2,2, "ROJO", conversoDeImagenes));
+		listaDeFiguras.add(new FiguraT(2,2, "VIOLETA", conversoDeImagenes));
+		listaDeFiguras.add(new FiguraCuadrado(2,2, "NARANJA", conversoDeImagenes));
+	}
+	
+	private boolean verificarSiFiguraLlegoAbajo() {
+		if((figura.getPosicionY()*25) >= largoJuego-100) {
+			System.out.println("Fig llegó abajo: " + true);
+			return true;
+			//figLlegoAbajo = true;
+		}
+		System.out.println("Fig llegó abajo: " + false);
+		//figLlegoAbajo = false;
+		return false;
+	}
+	
+	private Figura crearUnaFigura() {
+		//mezcla el ArrayList y devuelve la primera figura
+		//método 1: mezclar el arrayList con shuffle y luego mostrar el primero con listaDeFiguras.get(0) 
+		//Collections.shuffle(listaDeFiguras);
+		//método2: simplemente usar get(numero random) (también podríamos mezclar las dos cosas)
+		return figura = listaDeFiguras.get((int) (Math.random() * listaDeFiguras.size()));
+
 	}
 
 	@Override
@@ -76,8 +122,12 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
             actualizarAmbiente();
             repintar();
             esperar(1000);
+            
             //figura.figuraRotar();
-            figura.setPosicionY(figura.getPosicionY() + 1);
+            /*while (figLlegoAbajo == false) {
+            	figura.moverseHaciaAbajo();
+            	//figura.setPosicionY(figura.getPosicionY() + 1);
+            }*/
         }
 		
 	}
@@ -118,16 +168,23 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	private void actualizarAmbiente() {
 		posicionX=posicionX+velocidadX;
         posicionY=posicionY+velocidadY;
-        figura.moverse();
+        verificarSiFiguraLlegoAbajo();
+        //figura.moverseHaciaAbajo();
+        /*do  {
+        	figura.moverseHaciaAbajo();
+        } while (verificarSiFiguraLlegoAbajo() == false);*/
+        /*if (verificarSiFiguraLlegoAbajo() == true) {
+        	crearUnaFigura();
+        }*/
     }
-
-
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		
 		
 	}
+	
+
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
@@ -138,10 +195,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		/*if (e.getKeyCode() == KeyEvent.VK_UP) {
-        	figura.figuraRotar();
-        	System.out.println("rotar");
-        }*/
+
 	}
 
 	@Override
@@ -155,11 +209,17 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
         
         if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
         	//figura.velocidadY++;
-        	figura.setPosicionY(figura.getPosicionY() + 2);
+        	//compruebo que una vez que llegó abajo no pueda seguir bajando con la tecla
+        	if (verificarSiFiguraLlegoAbajo() == false) {
+        		figura.setPosicionY(figura.getPosicionY() + 2);
+        	}
         }
         
         if (arg0.getKeyCode() == KeyEvent.VK_UP) {
-        	figura.figuraRotar();
+        	//si la pieza llegó abajo, no puede seguir rotando
+        	if (verificarSiFiguraLlegoAbajo() == false) {
+        		figura.figuraRotar();
+        	}
         }
         if (arg0.getKeyCode() == KeyEvent.VK_SPACE && pantalla == WELCOME_SCREEN ) {
         	actualizarAmbiente();

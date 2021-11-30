@@ -90,9 +90,10 @@ public abstract class Figura  {
 		}
 	}
 	
-	public void moverse() {
-        posicionX = posicionX + velocidadX;
-        posicionY = posicionY + velocidadY;
+	public void moverseHaciaAbajo() {
+        /*posicionX = posicionX + velocidadX;
+        posicionY = posicionY + velocidadY;*/
+		posicionY++;
     }
 		
 }
