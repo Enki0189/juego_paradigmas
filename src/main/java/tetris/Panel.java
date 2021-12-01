@@ -53,6 +53,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		conversoDeImagenes = new ConversoDeImagen("src/main/resources/imagenes/");
 		creadorDeFiguras = new CreadorDeFiguras(conversoDeImagenes);
 		figura = creadorDeFiguras.crearUnaFigura();
+		//verificarSiFiguraLlegoAbajo();
 		
         music = ImageLoader.LoadSound("/Tetris_theme.wav");
 	
@@ -98,15 +99,13 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
             actualizarAmbiente();
             repintar();
             esperar(1000);
-            figura.moverseHaciaAbajo();
-            
-            //figura.figuraRotar();
-            /*while (figLlegoAbajo == false) {
+            if (pantalla == GAME_SCREEN && verificarSiFiguraLlegoAbajo()== false ) {
             	figura.moverseHaciaAbajo();
-            	//figura.setPosicionY(figura.getPosicionY() + 1);
+            }
+            /*else if (verificarSiFiguraLlegoAbajo()== true) {
+            	figura = creadorDeFiguras.crearUnaFigura();
             }*/
-        }
-		
+		}
 	}
 	
 	private void esperar(int milisegundos) {
@@ -139,7 +138,6 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		if (pantalla == GAME_SCREEN) {
 			super.paintComponent(g);
 			figura.dibujarse(g);
-			//figura = creadorDeFiguras.crearUnaFigura();
 		}
 	}
 	
