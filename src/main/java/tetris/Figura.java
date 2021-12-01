@@ -38,7 +38,6 @@ public abstract class Figura  {
 		}
 	}
 	
-	
 	public void figuraRotar() {
 		    int tamanio = matrizFigura.length;
 		    int[][] nuevaMatriz = new int[tamanio][tamanio];

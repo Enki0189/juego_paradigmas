@@ -36,10 +36,12 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
     private int velocidadY;
     Figura figura;
     private ConversoDeImagen conversoDeImagenes;
+    private CreadorDeFiguras creadorDeFiguras;
+    
 
     private Clip music;
     private Image pantallaBienvenida = ImageLoader.loadImage("/tetrisInicio.png");
-    private ArrayList<Figura> listaDeFiguras = new ArrayList<>();
+    
     //private boolean figLlegoAbajo = false;
     
 
@@ -49,16 +51,11 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		this.anchoJuego = anchoJuego;
 		this.largoJuego = largoJuego;
 		conversoDeImagenes = new ConversoDeImagen("src/main/resources/imagenes/");
-		//figura = new FiguraL (2, 2, "NARANJA", conversoDeImagenes);
-
-		figura = new FiguraT (2, 2, "VIOLETA", conversoDeImagenes);
-		/*for (int i = 1; i < 4; i++) {
-			
-		}*/
+		creadorDeFiguras = new CreadorDeFiguras(conversoDeImagenes);
+		figura = creadorDeFiguras.crearUnaFigura();
+		
         music = ImageLoader.LoadSound("/Tetris_theme.wav");
-		
-		
-		
+	
 		music.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 	
@@ -69,9 +66,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 			throw new RuntimeException(e1);
 		}
 
-	}
-	
-	
+	}	
 	
 	private void mostrarMensaje(Graphics2D g2d) {
 		g2d.setColor(new Color(0, 0, 0));
@@ -80,21 +75,10 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		g2d.drawRect(60, largoJuego - 565, anchoJuego - 130, 50);
 		String mensaje = "Presiona la Barra espaciadora para Iniciar";
 		g2d.drawString(mensaje, anchoJuego - 430, 45);
-
-		//figura = new FiguraT (2, 2, "VIOLETA", conversoDeImagenes);
-		//figura = new FiguraZ (2, 2, "ROJO", conversoDeImagenes);
-		cargarListaDeFiguras();
-		figura = crearUnaFigura();
 		
 	}
 	
-	private void cargarListaDeFiguras() {
-		listaDeFiguras.add(new FiguraL(2, 2, "VERDE", conversoDeImagenes));
-		listaDeFiguras.add(new FiguraI(2, 2, "AZUL", conversoDeImagenes));
-		listaDeFiguras.add(new FiguraZ(2,2, "ROJO", conversoDeImagenes));
-		listaDeFiguras.add(new FiguraT(2,2, "VIOLETA", conversoDeImagenes));
-		listaDeFiguras.add(new FiguraCuadrado(2,2, "NARANJA", conversoDeImagenes));
-	}
+	
 	
 	private boolean verificarSiFiguraLlegoAbajo() {
 		if((figura.getPosicionY()*25) >= largoJuego-100) {
@@ -107,14 +91,6 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		return false;
 	}
 	
-	private Figura crearUnaFigura() {
-		//mezcla el ArrayList y devuelve la primera figura
-		//método 1: mezclar el arrayList con shuffle y luego mostrar el primero con listaDeFiguras.get(0) 
-		//Collections.shuffle(listaDeFiguras);
-		//método2: simplemente usar get(numero random) (también podríamos mezclar las dos cosas)
-		return figura = listaDeFiguras.get((int) (Math.random() * listaDeFiguras.size()));
-
-	}
 
 	@Override
 	public void run() {
@@ -122,6 +98,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
             actualizarAmbiente();
             repintar();
             esperar(1000);
+            figura.moverseHaciaAbajo();
             
             //figura.figuraRotar();
             /*while (figLlegoAbajo == false) {
@@ -162,6 +139,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		if (pantalla == GAME_SCREEN) {
 			super.paintComponent(g);
 			figura.dibujarse(g);
+			//figura = creadorDeFiguras.crearUnaFigura();
 		}
 	}
 	
