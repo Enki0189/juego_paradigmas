@@ -49,7 +49,28 @@ public abstract class Figura  {
 		    }
 		    matrizFigura = nuevaMatriz;
 	}
-		
+	
+	public void moverse() {
+		this.posicionX = posicionX + velocidadX;
+		this.posicionY = posicionY + velocidadY;
+	}
+	
+	public void figuraFrenar() {
+		this.velocidadY = 0;
+		this.velocidadX = 0;
+	}
+	
+	
+	public void imprimirMatriz() {
+		for(int i = 0; i < matrizFigura.length; i ++) {
+			for(int j = 0; j < 4; j ++) {
+				System.out.print(matrizFigura[i][j]);
+			}
+			System.out.println();
+		}
+	}
+	
+	
 	
 
 	public String getColor() {
@@ -72,6 +93,22 @@ public abstract class Figura  {
 		return posicionY;
 	}
 
+	public int getVelocidadX() {
+		return velocidadX;
+	}
+
+	public void setVelocidadX(int velocidadX) {
+		this.velocidadX = velocidadX;
+	}
+
+	public int getVelocidadY() {
+		return velocidadY;
+	}
+
+	public void setVelocidadY(int velocidadY) {
+		this.velocidadY = velocidadY;
+	}
+
 	public void setPosicionY(int posicionY) {
 		this.posicionY = posicionY;
 	}
@@ -80,19 +117,8 @@ public abstract class Figura  {
 		return matrizFigura;
 	}
 	
-	public void imprimirMatriz() {
-		for(int i = 0; i < matrizFigura.length; i ++) {
-			for(int j = 0; j < 4; j ++) {
-				System.out.print(matrizFigura[i][j]);
-			}
-			System.out.println();
-		}
-	}
 	
-	public void moverseHaciaAbajo() {
-        /*posicionX = posicionX + velocidadX;
-        posicionY = posicionY + velocidadY;*/
-		posicionY++;
-    }
+	
+	
 		
 }

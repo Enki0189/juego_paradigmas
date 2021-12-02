@@ -2,7 +2,6 @@
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -10,12 +9,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.sound.sampled.Clip;
 import javax.swing.JPanel;
@@ -34,7 +27,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	private int posicionY;
 	private int velocidadX;
     private int velocidadY;
-    Figura figura;
+    private Figura figura;
     private ConversoDeImagen conversoDeImagenes;
     private CreadorDeFiguras creadorDeFiguras;
     
@@ -81,27 +74,38 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	
 	
 	
-	private boolean verificarSiFiguraLlegoAbajo() {
-		if((figura.getPosicionY()*25) >= largoJuego-100) {
-			System.out.println("Fig llegó abajo: " + true);
-			return true;
+	//private boolean verificarSiFiguraLlegoAbajo() {
+		//if((figura.getPosicionY()*25) >= largoJuego-100) {
+			//System.out.println("Fig llegó abajo: " + true);
+			//return true;
 			//figLlegoAbajo = true;
-		}
-		System.out.println("Fig llegó abajo: " + false);
+		//}
+		//System.out.println("Fig llegó abajo: " + false);
 		//figLlegoAbajo = false;
+		//return false;
+	//}
+	
+	
+	
+	private boolean verificarSiFiguraLlegoAbajo() {
+		if (figura.getPosicionY() * 25 >= (largoJuego - 50)) {
+			figura.setVelocidadY(0);
+			figura.setVelocidadX(0);
+			return true;
+		}
 		return false;
 	}
 	
 
-	@Override
+	@Override 
 	public void run() {
 		while (true) {
             actualizarAmbiente();
             repintar();
-            esperar(1000);
-            if (pantalla == GAME_SCREEN && verificarSiFiguraLlegoAbajo()== false ) {
-            	figura.moverseHaciaAbajo();
-            }
+            esperar(50);
+            //if (pantalla == GAME_SCREEN && verificarSiFiguraLlegoAbajo()== false ) {
+            	//figura.moverseHaciaAbajo();
+            //}
             /*else if (verificarSiFiguraLlegoAbajo()== true) {
             	figura = creadorDeFiguras.crearUnaFigura();
             }*/
@@ -177,18 +181,27 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	@Override
 	public void keyPressed(KeyEvent arg0) {
         if (arg0.getKeyCode() == KeyEvent.VK_RIGHT) {
-           figura.posicionX++;
+        	if (verificarSiFiguraLlegoAbajo() == false) {
+        		figura.setVelocidadX(1);
+        		figura.moverse();
+        	}
+           
         }
         if (arg0.getKeyCode() == KeyEvent.VK_LEFT) {
-        	figura.posicionX--;
+        	if (verificarSiFiguraLlegoAbajo() == false) {
+        		figura.setVelocidadX(-1);
+        		figura.moverse();
+        	}
         }
         
         if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
         	//figura.velocidadY++;
         	//compruebo que una vez que llegó abajo no pueda seguir bajando con la tecla
         	if (verificarSiFiguraLlegoAbajo() == false) {
-        		figura.setPosicionY(figura.getPosicionY() + 2);
+        		figura.setVelocidadY(1);
+        		figura.moverse();
         	}
+ 
         }
         
         if (arg0.getKeyCode() == KeyEvent.VK_UP) {
