@@ -53,7 +53,6 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		conversoDeImagenes = new ConversoDeImagen("src/main/resources/imagenes/");
 		creadorDeFiguras = new CreadorDeFiguras(conversoDeImagenes);
 		figura = creadorDeFiguras.crearUnaFigura();
-		//verificarSiFiguraLlegoAbajo();
 		
         music = ImageLoader.LoadSound("/Tetris_theme.wav");
 	
@@ -99,12 +98,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
             actualizarAmbiente();
             repintar();
             esperar(1000);
-            if (pantalla == GAME_SCREEN && verificarSiFiguraLlegoAbajo()== false ) {
-            	figura.moverseHaciaAbajo();
-            }
-            /*else if (verificarSiFiguraLlegoAbajo()== true) {
-            	figura = creadorDeFiguras.crearUnaFigura();
-            }*/
+            moverFigura();
 		}
 	}
 	
@@ -115,6 +109,14 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
             throw new RuntimeException(e1);
         }
     }
+	
+	private void moverFigura() {
+		if (pantalla == GAME_SCREEN && verificarSiFiguraLlegoAbajo()== false ) {
+        	figura.moverseHaciaAbajo();
+        } else if (verificarSiFiguraLlegoAbajo()== true) {
+        	figura = creadorDeFiguras.crearUnaFigura();
+        }
+	}
 	
 	
 	
