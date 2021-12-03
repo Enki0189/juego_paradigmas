@@ -2,7 +2,6 @@
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -10,12 +9,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.sound.sampled.Clip;
 import javax.swing.JPanel;
@@ -34,16 +27,14 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	private int posicionY;
 	private int velocidadX;
     private int velocidadY;
-    Figura figura;
+    private Figura figura;
     private ConversoDeImagen conversoDeImagenes;
     private CreadorDeFiguras creadorDeFiguras;
-    
-
     private Clip music;
     private Image pantallaBienvenida = ImageLoader.loadImage("/tetrisInicio.png");
     private Image fondoJuego = ImageLoader.loadImage("/Fondo_juego.png");
     
-    //private boolean figLlegoAbajo = false;
+    
     
 
 
@@ -82,24 +73,42 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	
 	
 	
+	
+	
 	private boolean verificarSiFiguraLlegoAbajo() {
-		if((figura.getPosicionY()*25) >= largoJuego-100) {
-			System.out.println("Fig llegó abajo: " + true);
+		if (figura.getPosicionY() * 25 >= (largoJuego - 50)) {
+			figura.setVelocidadY(0);
+			figura.setVelocidadX(0);
 			return true;
-			//figLlegoAbajo = true;
 		}
-		System.out.println("Fig llegó abajo: " + false);
-		//figLlegoAbajo = false;
+		return false;
+	}
+	
+	private boolean verificarSiFiguraTocaParedIzquierda() {
+		if (figura.getPosicionX() <= 0 ) {
+			figura.frenar();
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean verificarSiFiguraTocaParedDerecha() {
+		if (figura.getPosicionX() >= 10) {
+			figura.frenar();
+			return true;
+		}
 		return false;
 	}
 	
 
-	@Override
+	@Override 
 	public void run() {
 		while (true) {
             actualizarAmbiente();
             repintar();
             esperar(100);
+            esperar(50);
+
             moverFigura();
 		}
 	}
@@ -113,8 +122,8 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
     }
 	
 	private void moverFigura() {
-		if (pantalla == GAME_SCREEN && verificarSiFiguraLlegoAbajo()== false ) {
-        	figura.moverseHaciaAbajo();
+		if (pantalla == GAME_SCREEN && verificarSiFiguraLlegoAbajo() == false ) {
+        	figura.moverseAbajo();
         } else if (verificarSiFiguraLlegoAbajo()== true) {
         	figura = creadorDeFiguras.crearUnaFigura();
         }
@@ -149,6 +158,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	private void actualizarAmbiente() {
 		posicionX=posicionX+velocidadX;
         posicionY=posicionY+velocidadY;
+
         //verificarSiFiguraLlegoAbajo();
         //figura.moverseHaciaAbajo();
         /*do  {
@@ -157,6 +167,8 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
         /*if (verificarSiFiguraLlegoAbajo() == true) {
         	crearUnaFigura();
         }*/
+        verificarSiFiguraLlegoAbajo();
+       
     }
 
 	@Override
@@ -182,18 +194,23 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	@Override
 	public void keyPressed(KeyEvent arg0) {
         if (arg0.getKeyCode() == KeyEvent.VK_RIGHT) {
-           figura.posicionX++;
+        	if (verificarSiFiguraLlegoAbajo() == false && verificarSiFiguraTocaParedDerecha() == false) {
+        		figura.moverseDerecha();
+        	}
+            
         }
         if (arg0.getKeyCode() == KeyEvent.VK_LEFT) {
-        	figura.posicionX--;
+        	if (verificarSiFiguraLlegoAbajo() == false && verificarSiFiguraTocaParedIzquierda() == false) {
+        		figura.moverseIzquierda();
+        	}
         }
         
         if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
-        	//figura.velocidadY++;
         	//compruebo que una vez que llegó abajo no pueda seguir bajando con la tecla
         	if (verificarSiFiguraLlegoAbajo() == false) {
-        		figura.setPosicionY(figura.getPosicionY() + 2);
+        		figura.moverseAbajo();
         	}
+ 
         }
         
         if (arg0.getKeyCode() == KeyEvent.VK_UP) {
