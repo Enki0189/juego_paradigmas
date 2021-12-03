@@ -99,7 +99,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		while (true) {
             actualizarAmbiente();
             repintar();
-            esperar(1000);
+            esperar(100);
             moverFigura();
 		}
 	}
@@ -149,7 +149,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	private void actualizarAmbiente() {
 		posicionX=posicionX+velocidadX;
         posicionY=posicionY+velocidadY;
-        verificarSiFiguraLlegoAbajo();
+        //verificarSiFiguraLlegoAbajo();
         //figura.moverseHaciaAbajo();
         /*do  {
         	figura.moverseHaciaAbajo();

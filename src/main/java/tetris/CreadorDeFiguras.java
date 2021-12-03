@@ -30,7 +30,7 @@ public class CreadorDeFiguras {
    protected Figura crearUnaFigura() {
 		//mezcla el ArrayList y devuelve la primera figura
 		//método 1: mezclar el arrayList con shuffle y luego mostrar el primero con listaDeFiguras.get(0) 
-		//Collections.shuffle(listaDeFiguras);
+		Collections.shuffle(listaDeFiguras);
 		//método2: simplemente usar get(numero random) (también podríamos mezclar las dos cosas)
 		return figura = listaDeFiguras.get((int) (Math.random() * listaDeFiguras.size()));
 
