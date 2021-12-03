@@ -1,6 +1,6 @@
 package tetris;
 
-public class FiguraL extends Figura{
+public class FiguraL extends Figura {
 
 	public FiguraL(int posicionX, int posicionY, String color, ConversoDeImagen conversoDeImagen) {
 		super(posicionX, posicionY, color, conversoDeImagen);

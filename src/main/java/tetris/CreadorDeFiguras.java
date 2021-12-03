@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class CreadorDeFiguras {
 	
-	Figura figura;
+	private Figura figura;
     private ArrayList<Figura> listaDeFiguras = new ArrayList<>();
 	private ConversoDeImagen conversoDeImagenes;
     
