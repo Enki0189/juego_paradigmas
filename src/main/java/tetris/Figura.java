@@ -49,10 +49,10 @@ public abstract class Figura implements Dibujable {
 		    matrizFigura = nuevaMatriz;
 	}
 	
-	public void moverse() {
-		this.posicionX = posicionX + velocidadX;
-		this.posicionY = posicionY + velocidadY;
-	}
+//	public void moverse() {
+//		this.posicionX = posicionX + velocidadX;
+//		this.posicionY = posicionY + velocidadY;
+//	}
 	
 	public void frenar() {
 		this.velocidadY = 0;
@@ -103,9 +103,18 @@ public abstract class Figura implements Dibujable {
 	public int[][] getMatrizFigura() {
 		return matrizFigura;
 	}
+
+	public void moverseAbajo() {
+		this.posicionY++;
+	};
 	
-	
-	
+	public void moverseDerecha() {
+		this.posicionX++;
+	};
+
+	public void moverseIzquierda() {
+		this.posicionX--;
+	};
 	
 		
 }
