@@ -16,7 +16,7 @@ public class Inicializador {
        
         ventanaJuego.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        ventanaJuego.setLocationRelativeTo(null);
+        
         
         ventanaJuego.setVisible(true);
         
@@ -27,7 +27,8 @@ public class Inicializador {
 
         ventanaJuego.add(panel);
         ventanaJuego.pack();
-        ventanaJuego.setLocation(200,200); 
+        ventanaJuego.setLocationRelativeTo(null);
+        //ventanaJuego.setLocation(200,200); 
         ventanaJuego.addMouseMotionListener(panel);
         ventanaJuego.addKeyListener(panel);      
         
