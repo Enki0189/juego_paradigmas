@@ -44,9 +44,6 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 			
 		}*/
         music = ImageLoader.LoadSound("/Tetris_theme.wav");
-		
-		
-		
 		music.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 	
@@ -66,8 +63,8 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		g2d.fillRect(60, largoJuego - 565, anchoJuego - 130, 50);
 		g2d.setColor(Color.white);
 		g2d.drawRect(60, largoJuego - 565, anchoJuego - 130, 50);
-		String mensaje = "Presiona la Barra espaciadora para Iniciar";
-		g2d.drawString(mensaje, anchoJuego - 430, 45);
+		String mensaje = "PRESIONA LA BARRA ESPACIADORA PARA INICIAR";
+		g2d.drawString(mensaje, anchoJuego - 530, 65);
 	}
 
 	@Override
