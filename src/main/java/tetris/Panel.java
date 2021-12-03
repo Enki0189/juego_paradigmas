@@ -41,6 +41,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 
     private Clip music;
     private Image pantallaBienvenida = ImageLoader.loadImage("/tetrisInicio.png");
+    private Image fondoJuego = ImageLoader.loadImage("/Fondo_juego.png");
     
     //private boolean figLlegoAbajo = false;
     
@@ -53,6 +54,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		conversoDeImagenes = new ConversoDeImagen("src/main/resources/imagenes/");
 		creadorDeFiguras = new CreadorDeFiguras(conversoDeImagenes);
 		figura = creadorDeFiguras.crearUnaFigura();
+		
 		
         music = ImageLoader.LoadSound("/Tetris_theme.wav");
 	
@@ -138,7 +140,8 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 			mostrarMensaje(graphics2d);
 		}
 		if (pantalla == GAME_SCREEN) {
-			super.paintComponent(g);
+			dibujarPantalla(graphics2d, fondoJuego);
+			//super.paintComponent(g);
 			figura.dibujarse(g);
 		}
 	}
