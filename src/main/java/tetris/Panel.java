@@ -123,11 +123,11 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	private void moverFigura() {
 		if (pantalla == GAME_SCREEN && verificarSiFiguraLlegoAbajo() == false ) {
         	figura.moverseAbajo();
-        }/* else if (verificarSiFiguraLlegoAbajo()== true) {
+        } else if (verificarSiFiguraLlegoAbajo()== true) {
         	
         	figura = creadorDeFiguras.crearUnaFigura();
         	figura.setPosicionY(0);
-        }*/
+        }
 
 	}
 	
