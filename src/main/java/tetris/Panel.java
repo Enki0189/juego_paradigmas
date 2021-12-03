@@ -71,9 +71,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		
 	}
 	
-	
-	
-	
+		
 	
 	private boolean verificarSiFiguraLlegoAbajo() {
 		if (figura.getPosicionY() * 25 >= (largoJuego - 50)) {
@@ -83,6 +81,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		}
 		return false;
 	}
+	
 	
 	private boolean verificarSiFiguraTocaParedIzquierda() {
 		if (figura.getPosicionX() <= 0 ) {
@@ -106,10 +105,10 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		while (true) {
             actualizarAmbiente();
             repintar();
-            esperar(100);
+            //esperar(1000);
             esperar(50);
 
-            moverFigura();
+            //moverFigura();
 		}
 	}
 	
@@ -124,9 +123,12 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	private void moverFigura() {
 		if (pantalla == GAME_SCREEN && verificarSiFiguraLlegoAbajo() == false ) {
         	figura.moverseAbajo();
-        } else if (verificarSiFiguraLlegoAbajo()== true) {
+        }/* else if (verificarSiFiguraLlegoAbajo()== true) {
+        	
         	figura = creadorDeFiguras.crearUnaFigura();
-        }
+        	figura.setPosicionY(0);
+        }*/
+
 	}
 	
 	
@@ -158,16 +160,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	private void actualizarAmbiente() {
 		posicionX=posicionX+velocidadX;
         posicionY=posicionY+velocidadY;
-
-        //verificarSiFiguraLlegoAbajo();
-        //figura.moverseHaciaAbajo();
-        /*do  {
-        	figura.moverseHaciaAbajo();
-        } while (verificarSiFiguraLlegoAbajo() == false);*/
-        /*if (verificarSiFiguraLlegoAbajo() == true) {
-        	crearUnaFigura();
-        }*/
-        verificarSiFiguraLlegoAbajo();
+        moverFigura();
        
     }
 

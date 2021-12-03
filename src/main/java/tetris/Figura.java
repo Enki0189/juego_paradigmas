@@ -106,6 +106,7 @@ public abstract class Figura implements Dibujable {
 
 	public void moverseAbajo() {
 		this.posicionY++;
+		//this.posicionY = posicionY + velocidadY;
 	};
 	
 	public void moverseDerecha() {
