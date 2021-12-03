@@ -1,9 +1,8 @@
 package tetris;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
-public abstract class Figura  {
+public abstract class Figura implements Dibujable {
 
 	private static final int ANCHO_CELDA = 25;
 	private static final int LARGO_CELDA = 25;
@@ -18,18 +17,18 @@ public abstract class Figura  {
 	public Figura(int posicionX, int posicionY, String color, ConversoDeImagen conversoDeImagen) {
 		this.posicionX = posicionX;
 		this.posicionY = posicionY;
-		this.velocidadX = velocidadX;
-		this.velocidadY = velocidadY;
+		this.velocidadX = 0;
+		this.velocidadY = 1;
 		this.color = color;
 		matrizFigura = new int[4][4];
 		this.conversoDeImagen = conversoDeImagen;
 	}
 	
+	@Override
 	public void dibujarse(Graphics graphics) {
 		for(int i = 0; i < matrizFigura.length ; i++) {
 			for(int j = 0;  j < matrizFigura[i].length; j++) {
 				if(matrizFigura[i][j] != 0) {
-					graphics.setColor(Color.GREEN);
 					int posx = (posicionX + j) * ANCHO_CELDA;
 					int posy = (posicionY + i) * LARGO_CELDA;
 					graphics.drawImage(conversoDeImagen.getImagen(this.color), posx, posy, ANCHO_CELDA, LARGO_CELDA, null);
@@ -37,7 +36,6 @@ public abstract class Figura  {
 			}
 		}
 	}
-	
 	
 	public void figuraRotar() {
 		    int tamanio = matrizFigura.length;
@@ -50,7 +48,16 @@ public abstract class Figura  {
 		    }
 		    matrizFigura = nuevaMatriz;
 	}
-		
+	
+//	public void moverse() {
+//		this.posicionX = posicionX + velocidadX;
+//		this.posicionY = posicionY + velocidadY;
+//	}
+	
+	public void frenar() {
+		this.velocidadY = 0;
+		this.velocidadX = 0;
+	}
 	
 
 	public String getColor() {
@@ -73,6 +80,22 @@ public abstract class Figura  {
 		return posicionY;
 	}
 
+	public int getVelocidadX() {
+		return velocidadX;
+	}
+
+	public void setVelocidadX(int velocidadX) {
+		this.velocidadX = velocidadX;
+	}
+
+	public int getVelocidadY() {
+		return velocidadY;
+	}
+
+	public void setVelocidadY(int velocidadY) {
+		this.velocidadY = velocidadY;
+	}
+
 	public void setPosicionY(int posicionY) {
 		this.posicionY = posicionY;
 	}
@@ -80,19 +103,19 @@ public abstract class Figura  {
 	public int[][] getMatrizFigura() {
 		return matrizFigura;
 	}
+
+	public void moverseAbajo() {
+		this.posicionY++;
+		//this.posicionY = posicionY + velocidadY;
+	};
 	
-	public void imprimirMatriz() {
-		for(int i = 0; i < matrizFigura.length; i ++) {
-			for(int j = 0; j < 4; j ++) {
-				System.out.print(matrizFigura[i][j]);
-			}
-			System.out.println();
-		}
-	}
+	public void moverseDerecha() {
+		this.posicionX++;
+	};
+
+	public void moverseIzquierda() {
+		this.posicionX--;
+	};
 	
-	public void moverse() {
-        posicionX = posicionX + velocidadX;
-        posicionY = posicionY + velocidadY;
-    }
 		
 }

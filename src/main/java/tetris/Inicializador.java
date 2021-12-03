@@ -13,37 +13,30 @@ public class Inicializador {
         System.setProperty("sun.java2d.opengl", "true");
         
         JFrame ventanaJuego = new JFrame("Tetris");
-
        
         ventanaJuego.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-       
-        ventanaJuego.setLocationRelativeTo(null);
-
+        
         
         ventanaJuego.setVisible(true);
-
+        
+        //agrego para que no se pueda cambiar el tamaño de la ventana luego de setearlo
+        ventanaJuego.setResizable(false);
         
         Panel panel= new Panel (anchoVentana, largoVentana);
 
         ventanaJuego.add(panel);
-
-      
         ventanaJuego.pack();
-        
+        ventanaJuego.setLocationRelativeTo(null);
+        //ventanaJuego.setLocation(200,200); 
         ventanaJuego.addMouseMotionListener(panel);
-        
-        //faltaba esta linea para que lea las teclas
-        ventanaJuego.addKeyListener(panel);
-        
+        ventanaJuego.addKeyListener(panel);      
         
         panel.run();
         
         Thread hilo = new Thread(panel);
         
         hilo.start(); // ejecuta run en forma de hilo
-        
-        
         
 	}
 

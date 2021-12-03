@@ -2,7 +2,6 @@
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -28,22 +27,37 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	private int posicionY;
 	private int velocidadX;
     private int velocidadY;
-    Figura figura;
+    private Figura figura;
     private ConversoDeImagen conversoDeImagenes;
+    private CreadorDeFiguras creadorDeFiguras;
     private Clip music;
     private Image pantallaBienvenida = ImageLoader.loadImage("/tetrisInicio.png");
+    private Image fondoJuego = ImageLoader.loadImage("/Fondo_juego.png");
+    
+    
+    
+
 
 	public Panel(int anchoJuego, int largoJuego) {
 		this.pantalla = WELCOME_SCREEN;
 		this.anchoJuego = anchoJuego;
 		this.largoJuego = largoJuego;
 		conversoDeImagenes = new ConversoDeImagen("src/main/resources/imagenes/");
+<<<<<<< HEAD
 		//figura = new FiguraL (2, 2, "NARANJA", conversoDeImagenes);
 		figura = new FiguraT (2, 2, "VIOLETA", conversoDeImagenes);
 		/*for (int i = 1; i < 4; i++) {
 			
 		}*/
         music = ImageLoader.LoadSound("/Tetris_theme.wav");
+=======
+		creadorDeFiguras = new CreadorDeFiguras(conversoDeImagenes);
+		figura = creadorDeFiguras.crearUnaFigura();
+		
+		
+        music = ImageLoader.LoadSound("/Tetris_theme.wav");
+	
+>>>>>>> 8aff8440ac77bbb5d7b2512755810c3e67d3c0a4
 		music.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 	
@@ -54,29 +68,62 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 			throw new RuntimeException(e1);
 		}
 
-	}
-	
-	
+	}	
 	
 	private void mostrarMensaje(Graphics2D g2d) {
 		g2d.setColor(new Color(0, 0, 0));
 		g2d.fillRect(60, largoJuego - 565, anchoJuego - 130, 50);
 		g2d.setColor(Color.white);
 		g2d.drawRect(60, largoJuego - 565, anchoJuego - 130, 50);
+<<<<<<< HEAD
 		String mensaje = "PRESIONA LA BARRA ESPACIADORA PARA INICIAR";
 		g2d.drawString(mensaje, anchoJuego - 530, 65);
+=======
+		String mensaje = "Presiona la Barra espaciadora para Iniciar";
+		g2d.drawString(mensaje, anchoJuego - 430, 45);
+		
 	}
+	
+		
+	
+	private boolean verificarSiFiguraLlegoAbajo() {
+		if (figura.getPosicionY() * 25 >= (largoJuego - 50)) {
+			figura.setVelocidadY(0);
+			figura.setVelocidadX(0);
+			return true;
+		}
+		return false;
+	}
+	
+	
+	private boolean verificarSiFiguraTocaParedIzquierda() {
+		if (figura.getPosicionX() <= 0 ) {
+			figura.frenar();
+			return true;
+		}
+		return false;
+>>>>>>> 8aff8440ac77bbb5d7b2512755810c3e67d3c0a4
+	}
+	
+	private boolean verificarSiFiguraTocaParedDerecha() {
+		if (figura.getPosicionX() >= 10) {
+			figura.frenar();
+			return true;
+		}
+		return false;
+	}
+	
 
-	@Override
+	@Override 
 	public void run() {
 		while (true) {
             actualizarAmbiente();
             repintar();
-            esperar(1000);
-            //figura.figuraRotar();
-            figura.setPosicionY(figura.getPosicionY() + 1);
-        }
-		
+            //esperar(1000);
+            esperar(50);
+
+            //moverFigura();
+		}
 	}
 	
 	private void esperar(int milisegundos) {
@@ -86,6 +133,17 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
             throw new RuntimeException(e1);
         }
     }
+	
+	private void moverFigura() {
+		if (pantalla == GAME_SCREEN && verificarSiFiguraLlegoAbajo() == false ) {
+        	figura.moverseAbajo();
+        } else if (verificarSiFiguraLlegoAbajo()== true) {
+        	
+        	figura = creadorDeFiguras.crearUnaFigura();
+        	figura.setPosicionY(0);
+        }
+
+	}
 	
 	
 	
@@ -107,7 +165,8 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 			mostrarMensaje(graphics2d);
 		}
 		if (pantalla == GAME_SCREEN) {
-			super.paintComponent(g);
+			dibujarPantalla(graphics2d, fondoJuego);
+			//super.paintComponent(g);
 			figura.dibujarse(g);
 		}
 	}
@@ -115,16 +174,17 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	private void actualizarAmbiente() {
 		posicionX=posicionX+velocidadX;
         posicionY=posicionY+velocidadY;
-        figura.moverse();
+        moverFigura();
+       
     }
-
-
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		
 		
 	}
+	
+
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
@@ -135,28 +195,36 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		/*if (e.getKeyCode() == KeyEvent.VK_UP) {
-        	figura.figuraRotar();
-        	System.out.println("rotar");
-        }*/
+
 	}
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
         if (arg0.getKeyCode() == KeyEvent.VK_RIGHT) {
-           figura.posicionX++;
+        	if (verificarSiFiguraLlegoAbajo() == false && verificarSiFiguraTocaParedDerecha() == false) {
+        		figura.moverseDerecha();
+        	}
+            
         }
         if (arg0.getKeyCode() == KeyEvent.VK_LEFT) {
-        	figura.posicionX--;
+        	if (verificarSiFiguraLlegoAbajo() == false && verificarSiFiguraTocaParedIzquierda() == false) {
+        		figura.moverseIzquierda();
+        	}
         }
         
         if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
-        	//figura.velocidadY++;
-        	figura.setPosicionY(figura.getPosicionY() + 2);
+        	//compruebo que una vez que llegó abajo no pueda seguir bajando con la tecla
+        	if (verificarSiFiguraLlegoAbajo() == false) {
+        		figura.moverseAbajo();
+        	}
+ 
         }
         
         if (arg0.getKeyCode() == KeyEvent.VK_UP) {
-        	figura.figuraRotar();
+        	//si la pieza llegó abajo, no puede seguir rotando
+        	if (verificarSiFiguraLlegoAbajo() == false) {
+        		figura.figuraRotar();
+        	}
         }
         if (arg0.getKeyCode() == KeyEvent.VK_SPACE && pantalla == WELCOME_SCREEN ) {
         	actualizarAmbiente();
