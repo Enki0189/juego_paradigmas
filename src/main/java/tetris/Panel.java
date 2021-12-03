@@ -124,9 +124,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		if (pantalla == GAME_SCREEN && verificarSiFiguraLlegoAbajo() == false ) {
         	figura.moverseAbajo();
         } else if (verificarSiFiguraLlegoAbajo()== true) {
-        	
         	figura = creadorDeFiguras.crearUnaFigura();
-        	figura.setPosicionY(0);
         }
 
 	}
