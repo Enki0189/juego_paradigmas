@@ -2,6 +2,7 @@
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -9,9 +10,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-
 import javax.sound.sampled.Clip;
 import javax.swing.JPanel;
+
+
 
 
 
@@ -33,32 +35,35 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
     private Clip music;
     private Image pantallaBienvenida = ImageLoader.loadImage("/tetrisInicio.png");
     private Image fondoJuego = ImageLoader.loadImage("/Fondo_juego.png");
-    
-    
-    
-
+    private boolean gamePaused = false;
+    //private int mouseX, mouseY;
+	//private boolean leftClick = false;
+	//private Rectangle stopBounds, refreshBounds;
+	//private BufferedImage  pause, refresh;
+	
 
 	public Panel(int anchoJuego, int largoJuego) {
 		this.pantalla = WELCOME_SCREEN;
 		this.anchoJuego = anchoJuego;
 		this.largoJuego = largoJuego;
 		conversoDeImagenes = new ConversoDeImagen("src/main/resources/imagenes/");
-<<<<<<< HEAD
+
 		//figura = new FiguraL (2, 2, "NARANJA", conversoDeImagenes);
 		figura = new FiguraT (2, 2, "VIOLETA", conversoDeImagenes);
 		/*for (int i = 1; i < 4; i++) {
 			
 		}*/
         music = ImageLoader.LoadSound("/Tetris_theme.wav");
-=======
+
 		creadorDeFiguras = new CreadorDeFiguras(conversoDeImagenes);
 		figura = creadorDeFiguras.crearUnaFigura();
 		
 		
         music = ImageLoader.LoadSound("/Tetris_theme.wav");
-	
->>>>>>> 8aff8440ac77bbb5d7b2512755810c3e67d3c0a4
+
 		music.loop(Clip.LOOP_CONTINUOUSLY);
+		
+		
 	}
 	
 	private void dibujarPantalla(Graphics g, Image screen) {
@@ -75,12 +80,10 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		g2d.fillRect(60, largoJuego - 565, anchoJuego - 130, 50);
 		g2d.setColor(Color.white);
 		g2d.drawRect(60, largoJuego - 565, anchoJuego - 130, 50);
-<<<<<<< HEAD
+
 		String mensaje = "PRESIONA LA BARRA ESPACIADORA PARA INICIAR";
 		g2d.drawString(mensaje, anchoJuego - 530, 65);
-=======
-		String mensaje = "Presiona la Barra espaciadora para Iniciar";
-		g2d.drawString(mensaje, anchoJuego - 430, 45);
+
 		
 	}
 	
@@ -102,7 +105,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 			return true;
 		}
 		return false;
->>>>>>> 8aff8440ac77bbb5d7b2512755810c3e67d3c0a4
+
 	}
 	
 	private boolean verificarSiFiguraTocaParedDerecha() {
@@ -154,7 +157,9 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	
 	private void repintar() {
         this.repaint();
+        
     }
+	
 	
 	@Override
 	protected void paintComponent (Graphics g) {
@@ -168,6 +173,13 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 			dibujarPantalla(graphics2d, fondoJuego);
 			//super.paintComponent(g);
 			figura.dibujarse(g);
+		}
+		if(gamePaused)
+		{
+			String gamePausedString = "GAME PAUSED";
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("Georgia", Font.BOLD, 30));
+			g.drawString(gamePausedString, 35, largoJuego/2);
 		}
 	}
 	
@@ -238,6 +250,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	     velocidadY = 0;
 		
 	}
+	
 	
 	
 
