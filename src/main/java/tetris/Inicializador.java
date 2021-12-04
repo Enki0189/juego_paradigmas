@@ -18,7 +18,7 @@ public class Inicializador {
         
         ventanaJuego.setVisible(true);
         
-        //agrego para que no se pueda cambiar el tamaño de la ventana luego de setearlo
+        //agrego para que no se pueda cambiar el tamaï¿½o de la ventana luego de setearlo
         ventanaJuego.setResizable(false);
         
         Panel panel= new Panel (anchoVentana, largoVentana);

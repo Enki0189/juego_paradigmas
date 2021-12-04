@@ -2,6 +2,7 @@
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -12,6 +13,8 @@ import java.awt.event.MouseMotionListener;
 
 import javax.sound.sampled.Clip;
 import javax.swing.JPanel;
+
+
 
 
 
@@ -27,6 +30,12 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
     private Clip music;
     private Image pantallaBienvenida = ImageLoader.loadImage("/tetrisInicio.png");
     private Image fondoJuego = ImageLoader.loadImage("/Fondo_juego.png");
+    private boolean gamePaused = false;
+    //private int mouseX, mouseY;
+	//private boolean leftClick = false;
+	//private Rectangle stopBounds, refreshBounds;
+	//private BufferedImage  pause, refresh;
+	
 
     
 	public Panel(int anchoJuego, int largoJuego) {
@@ -35,7 +44,10 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		this.largoJuego = largoJuego;
 		tablero = new Tablero(new ConversoDeImagen("src/main/resources/imagenes/"));
         music = ImageLoader.LoadSound("/Tetris_theme.wav");
+        music = ImageLoader.LoadSound("/Tetris_theme.wav");
 		music.loop(Clip.LOOP_CONTINUOUSLY);
+		
+		
 	}
 	
 	private void dibujarPantalla(Graphics g, Image screen) {
@@ -55,7 +67,6 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		String mensaje = "PRESIONA LA BARRA ESPACIADORA PARA INICIAR";
 		g2d.drawString(mensaje, anchoJuego - 530, 65);
 	}
-	
 
 	@Override 
 	public void run() {
@@ -84,7 +95,9 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	
 	private void repintar() {
         this.repaint();
+        
     }
+	
 	
 	@Override
 	protected void paintComponent (Graphics g) {
@@ -98,6 +111,13 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 			dibujarPantalla(graphics2d, fondoJuego);
 			//super.paintComponent(g);
 			tablero.dibujarse(g);
+		}
+		if(gamePaused)
+		{
+			String gamePausedString = "GAME PAUSED";
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("Georgia", Font.BOLD, 30));
+			g.drawString(gamePausedString, 35, largoJuego/2);
 		}
 	}
 	
@@ -154,6 +174,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	public void keyReleased(KeyEvent e) {
 		
 	}
+	
 	
 	
 
