@@ -35,6 +35,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	//private boolean leftClick = false;
 	//private Rectangle stopBounds, refreshBounds;
 	//private BufferedImage  pause, refresh;
+	private int contadorTiempo;
 	
 
     
@@ -123,7 +124,11 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	
 	private void actualizarAmbiente() {
 		if (pantalla == GAME_SCREEN) {
-			tablero.actualizar();
+			contadorTiempo++;
+			if(contadorTiempo == 5) {
+				contadorTiempo = 0;
+				tablero.actualizar();
+			}
 		}
     }
 

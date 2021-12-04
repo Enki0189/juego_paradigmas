@@ -48,6 +48,7 @@ public class Tablero implements Dibujable {
 	}
 	
 	public void actualizar() {
+		
 		figuraActual.moverseAbajo();
 		
 		if(huboColision()) {
