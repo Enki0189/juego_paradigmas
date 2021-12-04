@@ -47,8 +47,6 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		this.anchoJuego = anchoJuego;
 		this.largoJuego = largoJuego;
 		conversoDeImagenes = new ConversoDeImagen("src/main/resources/imagenes/");
-<<<<<<< HEAD
-
 		//figura = new FiguraL (2, 2, "NARANJA", conversoDeImagenes);
 		figura = new FiguraT (2, 2, "VIOLETA", conversoDeImagenes);
 		/*for (int i = 1; i < 4; i++) {
@@ -57,15 +55,12 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
         music = ImageLoader.LoadSound("/Tetris_theme.wav");
 
 		creadorDeFiguras = new CreadorDeFiguras(conversoDeImagenes);
-=======
+
         creadorDeFiguras = new CreadorDeFiguras(conversoDeImagenes);
->>>>>>> ea424785ba9a681f071c38b02bb872d9b033239f
+
 		figura = creadorDeFiguras.crearUnaFigura();
         music = ImageLoader.LoadSound("/Tetris_theme.wav");
-<<<<<<< HEAD
 
-=======
->>>>>>> ea424785ba9a681f071c38b02bb872d9b033239f
 		music.loop(Clip.LOOP_CONTINUOUSLY);
 		
 		
@@ -85,16 +80,12 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		g2d.fillRect(60, largoJuego - 565, anchoJuego - 130, 50);
 		g2d.setColor(Color.white);
 		g2d.drawRect(60, largoJuego - 565, anchoJuego - 130, 50);
-<<<<<<< HEAD
+
 
 		String mensaje = "PRESIONA LA BARRA ESPACIADORA PARA INICIAR";
 		g2d.drawString(mensaje, anchoJuego - 530, 65);
 
-		
-=======
-		String mensaje = "PRESIONA LA BARRA ESPACIADORA PARA INICIAR";
-		g2d.drawString(mensaje, anchoJuego - 530, 65);
->>>>>>> ea424785ba9a681f071c38b02bb872d9b033239f
+
 	}
 	
 		
@@ -115,10 +106,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 			return true;
 		}
 		return false;
-<<<<<<< HEAD
 
-=======
->>>>>>> ea424785ba9a681f071c38b02bb872d9b033239f
 	}
 	
 	private boolean verificarSiFiguraTocaParedDerecha() {
