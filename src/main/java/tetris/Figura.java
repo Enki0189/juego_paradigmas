@@ -37,6 +37,7 @@ public abstract class Figura implements Dibujable {
 		}
 	}
 	
+
 	public void figuraRotar() {
 		    int tamanio = matrizFigura.length;
 		    int[][] nuevaMatriz = new int[tamanio][tamanio];
