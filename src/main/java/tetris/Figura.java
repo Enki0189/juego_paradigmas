@@ -31,7 +31,7 @@ public abstract class Figura implements Dibujable {
 				if(matrizFigura[i][j] != 0) {
 					int posx = (posicionX + j) * ANCHO_CELDA;
 					int posy = (posicionY + i) * LARGO_CELDA;
-					graphics.drawImage(conversoDeImagen.getImagen(this.color), posx, posy, ANCHO_CELDA, LARGO_CELDA, null);
+					graphics.drawImage(conversoDeImagen.getImagen(this.color), posx+150, posy, ANCHO_CELDA, LARGO_CELDA, null);
 				}
 			}
 		}

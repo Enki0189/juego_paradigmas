@@ -13,6 +13,8 @@ public class Tablero implements Dibujable {
 	private CreadorDeFiguras creadorDeFiguras;
 	private ConversoDeImagen conversoDeImagen;
 	private Figura figuraActual;
+	protected int posicionX;
+	protected int posicionY;
 	
 	public Tablero (ConversoDeImagen conversoDeImagen) {
 		this.matrizTablero = new int [][] {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -144,7 +146,7 @@ public class Tablero implements Dibujable {
 				if(matrizTablero[i][j] != 0) {
 					int posx = j * ANCHO_CELDA;
 					int posy = i * LARGO_CELDA;
-					graphics.drawImage(conversoDeImagen.getImagen("ROJO"), posx, posy, ANCHO_CELDA, LARGO_CELDA, null);
+					graphics.drawImage(conversoDeImagen.getImagen("ROJO"), (posx+150), (posy), (ANCHO_CELDA), (LARGO_CELDA), null);
 				}
 			}
 		}
