@@ -23,28 +23,17 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 	private final static int GAME_SCREEN = 2;
 	private int anchoJuego;
 	private int largoJuego;
-	private int posicionX;
-	private int posicionY;
-	private int velocidadX;
-    private int velocidadY;
-    private Figura figura;
-    private ConversoDeImagen conversoDeImagenes;
-    private CreadorDeFiguras creadorDeFiguras;
+    private Tablero tablero;
     private Clip music;
     private Image pantallaBienvenida = ImageLoader.loadImage("/tetrisInicio.png");
     private Image fondoJuego = ImageLoader.loadImage("/Fondo_juego.png");
-    
-    
-    
 
-
+    
 	public Panel(int anchoJuego, int largoJuego) {
 		this.pantalla = WELCOME_SCREEN;
 		this.anchoJuego = anchoJuego;
 		this.largoJuego = largoJuego;
-		conversoDeImagenes = new ConversoDeImagen("src/main/resources/imagenes/");
-        creadorDeFiguras = new CreadorDeFiguras(conversoDeImagenes);
-		figura = creadorDeFiguras.crearUnaFigura();
+		tablero = new Tablero(new ConversoDeImagen("src/main/resources/imagenes/"));
         music = ImageLoader.LoadSound("/Tetris_theme.wav");
 		music.loop(Clip.LOOP_CONTINUOUSLY);
 	}
@@ -67,34 +56,6 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		g2d.drawString(mensaje, anchoJuego - 530, 65);
 	}
 	
-		
-	
-	private boolean verificarSiFiguraLlegoAbajo() {
-		if (figura.getPosicionY() * 25 >= (largoJuego - 50)) {
-			figura.setVelocidadY(0);
-			figura.setVelocidadX(0);
-			return true;
-		}
-		return false;
-	}
-	
-	
-	private boolean verificarSiFiguraTocaParedIzquierda() {
-		if (figura.getPosicionX() <= 0 ) {
-			figura.frenar();
-			return true;
-		}
-		return false;
-	}
-	
-	private boolean verificarSiFiguraTocaParedDerecha() {
-		if (figura.getPosicionX() >= 10) {
-			figura.frenar();
-			return true;
-		}
-		return false;
-	}
-	
 
 	@Override 
 	public void run() {
@@ -114,18 +75,7 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
         } catch (Exception e1) {
             throw new RuntimeException(e1);
         }
-    }
-	
-	private void moverFigura() {
-		if (pantalla == GAME_SCREEN && verificarSiFiguraLlegoAbajo() == false ) {
-        	figura.moverseAbajo();
-        } else if (verificarSiFiguraLlegoAbajo()== true) {
-        	figura = creadorDeFiguras.crearUnaFigura();
-        }
-
-	}
-	
-	
+    }	
 	
 	@Override
 	public Dimension getPreferredSize() {
@@ -147,20 +97,18 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 		if (pantalla == GAME_SCREEN) {
 			dibujarPantalla(graphics2d, fondoJuego);
 			//super.paintComponent(g);
-			figura.dibujarse(g);
+			tablero.dibujarse(g);
 		}
 	}
 	
 	private void actualizarAmbiente() {
-		posicionX=posicionX+velocidadX;
-        posicionY=posicionY+velocidadY;
-        moverFigura();
-       
+		if (pantalla == GAME_SCREEN) {
+			tablero.actualizar();
+		}
     }
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		
 		
 	}
 	
@@ -168,9 +116,6 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		this.posicionX = e.getX();
-		this.posicionY = e.getY();
-		
 	}
 
 	@Override
@@ -180,32 +125,25 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-        if (arg0.getKeyCode() == KeyEvent.VK_RIGHT) {
-        	if (verificarSiFiguraLlegoAbajo() == false && verificarSiFiguraTocaParedDerecha() == false) {
-        		figura.moverseDerecha();
-        	}
-            
-        }
-        if (arg0.getKeyCode() == KeyEvent.VK_LEFT) {
-        	if (verificarSiFiguraLlegoAbajo() == false && verificarSiFiguraTocaParedIzquierda() == false) {
-        		figura.moverseIzquierda();
-        	}
-        }
+		if (pantalla == GAME_SCREEN) {
+			if (arg0.getKeyCode() == KeyEvent.VK_RIGHT) {
+	        	tablero.moverFiguraActualDerecha();
+	        }
+	        
+	        if (arg0.getKeyCode() == KeyEvent.VK_LEFT) {
+	        	tablero.moverFiguraActualIzquierda();
+	        }
+	        
+	        if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
+	        	tablero.moverFiguraAbajo();
+	        }
+	        
+	        if (arg0.getKeyCode() == KeyEvent.VK_UP) {
+	        	tablero.rotarFiguraActual();
+	        }
+		}
         
-        if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
-        	//compruebo que una vez que llegó abajo no pueda seguir bajando con la tecla
-        	if (verificarSiFiguraLlegoAbajo() == false) {
-        		figura.moverseAbajo();
-        	}
- 
-        }
         
-        if (arg0.getKeyCode() == KeyEvent.VK_UP) {
-        	//si la pieza llegó abajo, no puede seguir rotando
-        	if (verificarSiFiguraLlegoAbajo() == false) {
-        		figura.figuraRotar();
-        	}
-        }
         if (arg0.getKeyCode() == KeyEvent.VK_SPACE && pantalla == WELCOME_SCREEN ) {
         	actualizarAmbiente();
         	pantalla = GAME_SCREEN;
@@ -214,8 +152,6 @@ public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyL
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		 velocidadX = 0;
-	     velocidadY = 0;
 		
 	}
 	

@@ -15,8 +15,6 @@ public class Inicializador {
         JFrame ventanaJuego = new JFrame("Tetris");
        
         ventanaJuego.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        
         
         ventanaJuego.setVisible(true);
         
