@@ -30,5 +30,21 @@ public class ConversoDeImagen {
 		return imagenesPorColor.get(color.toUpperCase());
 	}
 	
-	
+	public BufferedImage getImagen(int n) {
+		if(n == 1) {
+			return imagenesPorColor.get("NARANJA");
+		} else if(n == 2) {
+			return imagenesPorColor.get("ROJO");
+		} else if(n == 3) {
+			return imagenesPorColor.get("VERDE");
+		} else if(n == 4 ) {
+			return imagenesPorColor.get("VIOLETA");
+		} else if(n == 5) {
+			return imagenesPorColor.get("AZUL");
+		}
+		
+		//Si es otro numero retorna siempre azul
+		return imagenesPorColor.get("AZUL");
+		
+	}
 }
