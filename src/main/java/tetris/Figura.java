@@ -32,6 +32,7 @@ public abstract class Figura implements Dibujable {
 					int posx = (posicionX + j) * ANCHO_CELDA;
 					int posy = (posicionY + i) * LARGO_CELDA;
 					graphics.drawImage(conversoDeImagen.getImagen(this.color), posx, posy, ANCHO_CELDA, LARGO_CELDA, null);
+					
 				}
 			}
 		}
@@ -44,16 +45,12 @@ public abstract class Figura implements Dibujable {
 
 		    for (int x=0;x<tamanio;x++) {
 		        for (int y=0;y<tamanio;y++) {
-		            nuevaMatriz[y][tamanio-1-x] = matrizFigura[x][y];
+		            nuevaMatriz[tamanio-1-x][y] = matrizFigura[y][x];
 		        }
 		    }
 		    matrizFigura = nuevaMatriz;
 	}
 	
-//	public void moverse() {
-//		this.posicionX = posicionX + velocidadX;
-//		this.posicionY = posicionY + velocidadY;
-//	}
 	
 	public void frenar() {
 		this.velocidadY = 0;
@@ -107,7 +104,6 @@ public abstract class Figura implements Dibujable {
 
 	public void moverseAbajo() {
 		this.posicionY++;
-		//this.posicionY = posicionY + velocidadY;
 	};
 	
 	public void moverseDerecha() {
@@ -116,7 +112,11 @@ public abstract class Figura implements Dibujable {
 
 	public void moverseIzquierda() {
 		this.posicionX--;
-	};
+	}
+
+	protected void retroceder() {
+		this.posicionY--;
+	}
 	
 		
 }
