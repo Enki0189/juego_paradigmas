@@ -26,7 +26,7 @@ public class Inicializador {
         ventanaJuego.add(panel);
         ventanaJuego.pack();
         ventanaJuego.setLocationRelativeTo(null);
-        //ventanaJuego.setLocation(200,200); 
+         
         ventanaJuego.addMouseMotionListener(panel);
         ventanaJuego.addKeyListener(panel);      
         

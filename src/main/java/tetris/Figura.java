@@ -31,24 +31,47 @@ public abstract class Figura implements Dibujable {
 				if(matrizFigura[i][j] != 0) {
 					int posx = (posicionX + j) * ANCHO_CELDA;
 					int posy = (posicionY + i) * LARGO_CELDA;
-					graphics.drawImage(conversoDeImagen.getImagen(this.color), posx, posy, ANCHO_CELDA, LARGO_CELDA, null);
-					
+					graphics.drawImage(conversoDeImagen.getImagen(this.color), posx+150, posy, ANCHO_CELDA, LARGO_CELDA, null);
 				}
 			}
+			//borrar esta linea después
+			System.out.println("posicion x sin girar: " + posicionX);
 		}
 	}
 	
-
-	public void figuraRotar() {
-		    int tamanio = matrizFigura.length;
-		    int[][] nuevaMatriz = new int[tamanio][tamanio];
-
-		    for (int x=0;x<tamanio;x++) {
-		        for (int y=0;y<tamanio;y++) {
-		            nuevaMatriz[tamanio-1-x][y] = matrizFigura[y][x];
-		        }
-		    }
-		    matrizFigura = nuevaMatriz;
+	public void figuraRotar() throws ArrayIndexOutOfBoundsException {
+		//seguir probando acá
+		try {
+			int tamanio = matrizFigura.length;
+			int[][] nuevaMatriz = new int[tamanio][tamanio];
+			
+			if (posicionX >= 0 && posicionX < 8) {
+	
+			    for (int x=0;x<tamanio;x++) {
+			        for (int y=0;y<tamanio;y++) {
+			            nuevaMatriz[tamanio-1-x][y] = matrizFigura[y][x];
+			        }
+				}
+			    matrizFigura = nuevaMatriz;
+				    
+			} else {
+				
+				System.out.println("posicion x: " + posicionX);
+	
+				posicionX = posicionX+2;
+				//posicionY = posicionY+1;
+				//moverseDerecha();
+				for (int x=0;x<tamanio;x++) {
+					for (int y=0;y<tamanio;y++) {
+			            nuevaMatriz[tamanio-1-x][y] = matrizFigura[y][x];
+			        }
+			    }
+			    matrizFigura = nuevaMatriz;
+			}
+				
+		} catch (ArrayIndexOutOfBoundsException exception) {
+            System.out.println("no se puede mover la pieza");
+        }
 	}
 	
 	
