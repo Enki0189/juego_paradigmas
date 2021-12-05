@@ -2,6 +2,8 @@ package tetris;
 
 import java.awt.Graphics;
 
+
+
 public abstract class Figura implements Dibujable {
 
 	private static final int ANCHO_CELDA = 25;
@@ -13,6 +15,7 @@ public abstract class Figura implements Dibujable {
 	protected int velocidadX;
 	protected int velocidadY;
 	private ConversoDeImagen conversoDeImagen;
+	
 	
 	public Figura(int posicionX, int posicionY, String color, ConversoDeImagen conversoDeImagen) {
 		this.posicionX = posicionX;
@@ -36,6 +39,7 @@ public abstract class Figura implements Dibujable {
 			}
 			//borrar esta linea después
 			System.out.println("posicion x sin girar: " + posicionX);
+			
 		}
 	}
 	
@@ -73,6 +77,9 @@ public abstract class Figura implements Dibujable {
             System.out.println("no se puede mover la pieza");
         }
 	}
+	
+
+	
 	
 	
 	public void frenar() {

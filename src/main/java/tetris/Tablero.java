@@ -147,10 +147,26 @@ public class Tablero implements Dibujable {
 					int posx = j * ANCHO_CELDA;
 					int posy = i * LARGO_CELDA;
 					graphics.drawImage(conversoDeImagen.getImagen("ROJO"), (posx+150), (posy), (ANCHO_CELDA), (LARGO_CELDA), null);
+					
 				}
 			}
 		}
 		figuraActual.dibujarse(graphics);
+        int size = matrizTablero.length - 1;
+		
+		for(int i = matrizTablero.length - 1; i > 0; i--)
+		{
+			int count = 0;
+			for(int j = 0; j < matrizTablero[0].length; j++)
+			{
+				if(matrizTablero[i][j] != 0)
+					count++;
+				
+				matrizTablero[size][j] = matrizTablero[i][j];
+			}
+			if(count < matrizTablero[0].length)
+				size --;
+		}
 	}
 
 }
