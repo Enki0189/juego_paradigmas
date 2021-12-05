@@ -9,11 +9,6 @@ import javax.swing.JPanel;
 
 public class Pantallas  extends JPanel implements MouseListener, KeyListener {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
