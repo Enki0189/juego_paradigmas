@@ -72,7 +72,7 @@
  		while (true) {
              actualizarAmbiente();
              repintar();
-             esperar(1000);
+             esperar(50);
              //esperar(50);
              //moverFigura();
  		}

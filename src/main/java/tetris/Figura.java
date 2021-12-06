@@ -6,12 +6,14 @@ import java.awt.Graphics;
 
 public abstract class Figura implements Dibujable {
 
+	private static final int MARGEN_IZQUIERDO = 150;
 	private static final int ANCHO_CELDA = 25;
 	private static final int LARGO_CELDA = 25;
 	private String color;
 	protected int [][] matrizFigura;
 	protected int posicionX;
-	protected int posicionY;
+	protected int posicionY; 
+	
 	protected int velocidadX;
 	protected int velocidadY;
 	private ConversoDeImagen conversoDeImagen;
@@ -34,7 +36,7 @@ public abstract class Figura implements Dibujable {
 				if(matrizFigura[i][j] != 0) {
 					int posx = (posicionX + j) * ANCHO_CELDA;
 					int posy = (posicionY + i) * LARGO_CELDA;
-					graphics.drawImage(conversoDeImagen.getImagen(this.color), posx+150, posy, ANCHO_CELDA, LARGO_CELDA, null);
+					graphics.drawImage(conversoDeImagen.getImagen(this.color), posx + MARGEN_IZQUIERDO, posy, ANCHO_CELDA, LARGO_CELDA, null);
 				}
 			}
 			//borrar esta linea después
