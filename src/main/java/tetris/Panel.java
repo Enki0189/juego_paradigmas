@@ -34,7 +34,7 @@
  	//private boolean leftClick = false;
  	//private Rectangle stopBounds, refreshBounds;
  	//private BufferedImage  pause, refresh;
-	private int contadorTiempoCaida;
+	private int contadorTiempoCaida = 0;
 
 
 

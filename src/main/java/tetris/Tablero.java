@@ -72,7 +72,10 @@ public class Tablero implements Dibujable {
 		int[][] tableroFigura = figuraActual.getMatrizFigura();
 		for(int i = 0; i < tableroFigura.length; i++) {
 			for(int j = 0; j < tableroFigura[i].length; j++) {
-				if(tableroFigura[i][j] != 0 && figuraActual.getPosicionX() + j == (LIMITE_DERECHA_TABLERO - 1)) {
+				int posicionXinterseccion = figuraActual.getPosicionX() + j;
+			    int posicionYinterseccion = figuraActual.getPosicionY() + i;
+				if(tableroFigura[i][j] != 0 && (figuraActual.getPosicionX() + j == (LIMITE_DERECHA_TABLERO - 1) 
+						|| matrizTablero[posicionYinterseccion][posicionXinterseccion + 1] == 1)) {
 					return true;
 				}
 			}
@@ -91,7 +94,9 @@ public class Tablero implements Dibujable {
 		int[][] tableroFigura = figuraActual.getMatrizFigura();
 		for(int i = 0; i < tableroFigura.length; i++) {
 			for(int j = 0; j < tableroFigura[i].length; j++) {
-				if(tableroFigura[i][j] != 0 && figuraActual.getPosicionX() + j == LIMITE_IZQUIERDA_TABLERO) {
+				int posicionXinterseccion = figuraActual.getPosicionX() + j;
+				int posicionYinterseccion = figuraActual.getPosicionY() + i;
+				if(tableroFigura[i][j] != 0 && (figuraActual.getPosicionX() + j == LIMITE_IZQUIERDA_TABLERO || matrizTablero[posicionYinterseccion][posicionXinterseccion - 1] == 1)) {
 					return true;
 				}
 			}
