@@ -151,7 +151,7 @@ public class Tablero implements Dibujable {
 				if(matrizTablero[i][j] != 0) {
 					int posx = j * ANCHO_CELDA;
 					int posy = i * LARGO_CELDA;
-					graphics.drawImage(conversoDeImagen.getImagen("ROJO"), (posx+150), (posy), (ANCHO_CELDA), (LARGO_CELDA), null);
+					graphics.drawImage(conversoDeImagen.getImagen(matrizTablero[i][j]), (posx+150), (posy), (ANCHO_CELDA), (LARGO_CELDA), null);
 					
 				}
 			}
