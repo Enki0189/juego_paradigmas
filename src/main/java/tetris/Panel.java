@@ -34,6 +34,7 @@
  	//private boolean leftClick = false;
  	//private Rectangle stopBounds, refreshBounds;
  	//private BufferedImage  pause, refresh;
+	private int contadorTiempoCaida;
 
 
 
@@ -72,9 +73,7 @@
  		while (true) {
              actualizarAmbiente();
              repintar();
-             esperar(50);
-             //esperar(50);
-             //moverFigura();
+             esperar(25);
  		}
  	}
  	
@@ -121,7 +120,12 @@
 
  	private void actualizarAmbiente() {
  		if (pantalla == GAME_SCREEN) {
- 			tablero.actualizar();
+ 			//40 Veces 25 milisegundos es un segundo. Entonces cada 1 segundo cae la figura.
+ 			if(contadorTiempoCaida == 40) {
+ 				contadorTiempoCaida = 0;
+ 				tablero.actualizar();
+ 			}
+ 			contadorTiempoCaida++;
  		}
      }
  	@Override
