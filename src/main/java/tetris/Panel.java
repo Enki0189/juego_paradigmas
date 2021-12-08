@@ -27,8 +27,7 @@
      private Image fondoJuego = ImageLoader.loadImage("/Fondo_juego.png");
      private boolean gamePaused = false;
      private int contadorTiempoCaida = 0;
-
-
+     private int puntaje;
 
  	public Panel(int anchoJuego, int largoJuego) {
  		this.pantalla = WELCOME_SCREEN;
@@ -69,6 +68,27 @@
  		g2d.setFont(new Font("Rubik", Font.PLAIN, 50));
  		g2d.drawString(mensaje, 260, 265);
  	}
+ 	
+ 	private void infoEnPantalla(Graphics2D g2d) {
+ 		//cuadrado para lineas
+ 		g2d.setColor(new Color(0,0,0));
+ 		g2d.fillRect(575, 330, 110, 35);
+ 		g2d.setColor(new Color(222, 27, 82));
+ 		g2d.drawRect(575, 330, 110, 35);
+ 		g2d.setFont(new Font("Rubik", Font.PLAIN, 30));
+ 		String lineas = "" + tablero.lineasBorradas;
+ 		g2d.drawString(lineas, 600, 358);
+ 		
+ 		//cuadrado para lineas
+ 		g2d.setColor(new Color(0, 0, 0));
+ 		g2d.fillRect(575, 390, 110, 35);
+ 		g2d.setColor(new Color(222, 27, 82));
+ 		g2d.drawRect(575, 390, 110, 35);
+ 		g2d.setFont(new Font("Rubik", Font.PLAIN, 30));
+ 		String puntaje = "" + tablero.lineasBorradas*10;
+ 		g2d.drawString(puntaje, 600, 417);
+ 	}
+
 
  
  	@Override 
@@ -111,11 +131,13 @@
  			dibujarPantalla(graphics2d, fondoJuego);
  			//super.paintComponent(g);
  			
- 				tablero.dibujarse(g);
+ 			tablero.dibujarse(g);
+ 			infoEnPantalla(graphics2d);
  			 			
  			if (tablero.gameOver == true) {
  				mensajeGameOver(graphics2d);
  			}
+
  		}
  		if(gamePaused)
  		{
@@ -132,10 +154,11 @@
  			if(contadorTiempoCaida == 40) {
  				contadorTiempoCaida = 0;
  				if (tablero.gameOver == false) {
- 				tablero.actualizar();
+ 					tablero.actualizar();
  				}
  			}
  			contadorTiempoCaida++;
+ 			
  		}
      }
 

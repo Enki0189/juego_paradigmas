@@ -16,7 +16,7 @@ public class Tablero implements Dibujable {
 	private Figura figuraActual;
 	protected int posicionX;
 	protected int posicionY;
-	public int lineasBorradas;
+	public static int lineasBorradas = 0;
 	public boolean gameOver = false;
 	
 	public Tablero (ConversoDeImagen conversoDeImagen) {
@@ -60,6 +60,7 @@ public class Tablero implements Dibujable {
 				insertarFiguraEnTablero();				
 				figuraActual = creadorDeFiguras.crearUnaFigura();
 				borrarLinea();
+				System.out.println("lineas borradas" + lineasBorradas);
 		}
 		
 	}
@@ -181,20 +182,18 @@ public class Tablero implements Dibujable {
 		
 		for(int i = matrizTablero.length - 1; i > 0; i--) {
 			int count = 0;
-			for(int j = 0; j < matrizTablero[0].length; j++)
-			{
-				if(matrizTablero[i][j] != 0) 
-					
+			for(int j = 0; j < matrizTablero[0].length; j++) {
+				if(matrizTablero[i][j] != 0) {	
 					count++;
-				//System.out.println("count " + count);
-				
-				
+				}
 				matrizTablero[size][j] = matrizTablero[i][j];
-			
 			}
-			if(count < matrizTablero[0].length)			
-				size --;
-			//System.out.println("size " + size);
+			if(count < matrizTablero[0].length) {			
+				size --;			
+			}
+			if (count == 10) {
+				lineasBorradas = lineasBorradas+1;
+			}
 		}
 	}
 	
