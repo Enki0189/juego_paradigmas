@@ -11,8 +11,7 @@ public abstract class Figura implements Dibujable {
 	protected int[][] matrizFigura;
 	protected int posicionX;
 	protected int posicionY;
-
-	protected int velocidadX;
+    protected int velocidadX;
 	protected int velocidadY;
 	private ConversoDeImagen conversoDeImagen;
 
@@ -37,10 +36,8 @@ public abstract class Figura implements Dibujable {
 							ANCHO_CELDA, LARGO_CELDA, null);
 				}
 			}
-			// borrar esta linea después
-			System.out.println("posicion x sin girar: " + posicionX);
-
-		}
+			
+       }
 	}
 
 //	public void figuraRotar() throws ArrayIndexOutOfBoundsException {
@@ -97,6 +94,23 @@ public abstract class Figura implements Dibujable {
 		this.velocidadY = 0;
 		this.velocidadX = 0;
 	}
+	
+	public void moverseAbajo() {
+		this.posicionY++;
+	}
+
+	public void moverseDerecha() {
+		this.posicionX++;
+	}
+
+	public void moverseIzquierda() {
+		this.posicionX--;
+	}
+
+	protected void retroceder() {
+		this.posicionY--;
+	}
+
 
 	public String getColor() {
 		return color;
@@ -142,20 +156,5 @@ public abstract class Figura implements Dibujable {
 		return matrizFigura;
 	}
 
-	public void moverseAbajo() {
-		this.posicionY++;
-	};
-
-	public void moverseDerecha() {
-		this.posicionX++;
-	};
-
-	public void moverseIzquierda() {
-		this.posicionX--;
-	}
-
-	protected void retroceder() {
-		this.posicionY--;
-	}
-
+	
 }
