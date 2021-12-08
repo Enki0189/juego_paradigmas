@@ -51,7 +51,7 @@ public class Tablero implements Dibujable {
 	
 	public void actualizar() {
 		figuraActual.moverseAbajo();
-		
+		//figuraCayo = si figura toca el fondo y si lo toca retrocede asi no lo atraviesa
 		if(figuraCayo()) {
 			figuraActual.retroceder();
 			insertarFiguraEnTablero();
