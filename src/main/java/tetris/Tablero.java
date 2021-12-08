@@ -54,20 +54,13 @@ public class Tablero implements Dibujable {
 	
 	public void actualizar() {
 		hayColisionArriba();
-		
-			figuraActual.moverseAbajo();
-		
-		
+		figuraActual.moverseAbajo();		
 			if(figuraCayo()) {
 				figuraActual.retroceder();
-				insertarFiguraEnTablero();
-				//TODO Verificar si hubo linea: encontrarYBorrarLineas()
-				
+				insertarFiguraEnTablero();				
 				figuraActual = creadorDeFiguras.crearUnaFigura();
-			
+				borrarLinea();
 		}
-		borrarLinea();
-		
 		
 	}
 	

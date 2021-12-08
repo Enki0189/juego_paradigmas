@@ -13,8 +13,7 @@ import tetris.fabricafiguras.FabricaFiguraZ;
 
 public class CreadorDeFiguras {
 	
-    //private ArrayList<Figura> listaDeFiguras = new ArrayList<>();
-	private List<FabricaDeFiguras> fabricasDeFiguras;
+    private List<FabricaDeFiguras> fabricasDeFiguras;
 	private ConversoDeImagen conversoDeImagenes;
     
     public CreadorDeFiguras(ConversoDeImagen conversoDeImagenes) {
@@ -31,12 +30,9 @@ public class CreadorDeFiguras {
     	fabricasDeFiguras.add(new FabricaFiguraCuadrado(conversoDeImagenes));
 	}
     
-   public Figura crearUnaFigura() {
-		//mezcla el ArrayList y devuelve la primera figura
-		//método 1: mezclar el arrayList con shuffle y luego mostrar el primero con listaDeFiguras.get(0) 
-		Collections.shuffle(fabricasDeFiguras);
-		//método2: simplemente usar get(numero random) (también podríamos mezclar las dos cosas)
-		return fabricasDeFiguras.get((int) (Math.random() * fabricasDeFiguras.size())).fabricarFigura();
+    public Figura crearUnaFigura() {
+        Collections.shuffle(fabricasDeFiguras);
+        return fabricasDeFiguras.get((int) (Math.random() * fabricasDeFiguras.size())).fabricarFigura();
 
 	}
 

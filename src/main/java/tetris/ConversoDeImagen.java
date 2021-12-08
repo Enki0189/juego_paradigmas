@@ -21,7 +21,6 @@ public class ConversoDeImagen {
 			imagenesPorColor.put("VIOLETA", ImageIO.read(new File(path, "pieza_violeta_un_bloque.png")));
 			imagenesPorColor.put("AZUL", ImageIO.read(new File(path, "pieza_azul_un_bloque.png")));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

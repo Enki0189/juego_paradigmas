@@ -12,29 +12,21 @@
  import java.awt.event.MouseMotionListener;
  import javax.sound.sampled.Clip;
  import javax.swing.JPanel;
-
-
-
-
-
- public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyListener {
-
- 	private static final long serialVersionUID = 1L;
- 	private int pantalla;
- 	private final static int WELCOME_SCREEN = 1;
- 	private final static int GAME_SCREEN = 2;
- 	private int anchoJuego;
- 	private int largoJuego;
+ 
+ public class Panel extends JPanel implements Runnable, KeyListener {
+    
+     private static final long serialVersionUID = 1L;
+ 	 private int pantalla;
+ 	 private final static int WELCOME_SCREEN = 1;
+ 	 private final static int GAME_SCREEN = 2;
+ 	 private int anchoJuego;
+ 	 private int largoJuego;
      private Tablero tablero;
      private Clip music;
      private Image pantallaBienvenida = ImageLoader.loadImage("/tetrisInicio.png");
      private Image fondoJuego = ImageLoader.loadImage("/Fondo_juego.png");
      private boolean gamePaused = false;
-     //private int mouseX, mouseY;
- 	//private boolean leftClick = false;
- 	//private Rectangle stopBounds, refreshBounds;
- 	//private BufferedImage  pause, refresh;
-	private int contadorTiempoCaida = 0;
+     private int contadorTiempoCaida = 0;
 
 
 
@@ -146,21 +138,14 @@
  			contadorTiempoCaida++;
  		}
      }
+
  	
  
  	
- 	
- 	@Override
- 	public void mouseDragged(MouseEvent e) {
- 		
- 	}
- 	
- 	@Override
- 	public void mouseMoved(MouseEvent e) {
- 	}
  	@Override
  	public void keyTyped(KeyEvent e) {
  	}
+ 	
  	@Override
  	public void keyPressed(KeyEvent arg0) {
  		if (pantalla == GAME_SCREEN) {

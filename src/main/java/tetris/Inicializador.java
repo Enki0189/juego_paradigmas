@@ -24,10 +24,11 @@ public class Inicializador {
         Panel panel= new Panel (anchoVentana, largoVentana);
 
         ventanaJuego.add(panel);
+        
         ventanaJuego.pack();
+        
         ventanaJuego.setLocationRelativeTo(null);
          
-        ventanaJuego.addMouseMotionListener(panel);
         ventanaJuego.addKeyListener(panel);      
         
         panel.run();
