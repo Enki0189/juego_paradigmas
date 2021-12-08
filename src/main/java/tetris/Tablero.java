@@ -52,7 +52,7 @@ public class Tablero implements Dibujable {
 	public void actualizar() {
 		figuraActual.moverseAbajo();
 		
-		if(huboColision()) {
+		if(figuraCayo()) {
 			figuraActual.retroceder();
 			insertarFiguraEnTablero();
 			//TODO Verificar si hubo linea: encontrarYBorrarLineas()
@@ -109,9 +109,28 @@ public class Tablero implements Dibujable {
 	}
 	
 	public void rotarFiguraActual() {
-		figuraActual.figuraRotar();
+		int[][] tableroFiguraRotada = figuraActual.obtenerProximaRotacion();
+		if(!hayInterseccion(tableroFiguraRotada)) {
+			figuraActual.rotar();
+		}
 	}
 	
+	private boolean hayInterseccion(int[][] tableroFiguraRotada) {
+		for(int i = 0; i < tableroFiguraRotada.length; i++) {
+			for(int j = 0; j < tableroFiguraRotada[i].length; j++) {
+				int posicionXinterseccion = figuraActual.getPosicionX() + j;
+				int posicionYinterseccion = figuraActual.getPosicionY() + i;
+				if(tableroFiguraRotada[i][j] != 0 && (posicionXinterseccion < LIMITE_IZQUIERDA_TABLERO 
+						                             || posicionXinterseccion >= LIMITE_DERECHA_TABLERO
+						                             || posicionYinterseccion >= LIMITE_INFERIOR_TABLERO
+						                             || this.matrizTablero[posicionYinterseccion][posicionXinterseccion] != 0)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	private void insertarFiguraEnTablero() {
 		int[][] tableroFigura = figuraActual.getMatrizFigura();
 		
@@ -126,7 +145,7 @@ public class Tablero implements Dibujable {
 		}
 	}
 
-	private boolean huboColision() {
+	private boolean figuraCayo() {
 		int[][] tableroFigura = figuraActual.getMatrizFigura();
 		
 		for(int i = 0; i < tableroFigura.length; i++) {

@@ -11,7 +11,7 @@ public class FiguraCuadrado extends Figura{
 	}
 
 	@Override
-	public void figuraRotar() {
+	public void rotar() {
 		//El cuadrado no necesita rotar, se sobreescribe con un metodo que no hace nada
 	}
 
