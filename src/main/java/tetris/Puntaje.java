@@ -5,16 +5,22 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 
 public class Puntaje {
-	//static int lineasBorradas = Tablero.lineasBorradas;
+	public int lineas;
+	public int puntaje;
 	
- 	/*protected static void infoEnPantalla(Graphics2D g2d) {
+	public Puntaje(int lineas, int puntaje) {
+		this.lineas = Tablero.lineasBorradas;
+		this.puntaje = puntaje;
+	}
+	
+	public static void infoEnPantalla(Graphics2D g2d) {
  		//cuadrado para lineas
  		g2d.setColor(new Color(0,0,0));
  		g2d.fillRect(575, 330, 110, 35);
  		g2d.setColor(new Color(222, 27, 82));
  		g2d.drawRect(575, 330, 110, 35);
  		g2d.setFont(new Font("Rubik", Font.PLAIN, 30));
- 		String lineas = "" + lineasBorradas;
+ 		String lineas = "" + Tablero.lineasBorradas;
  		g2d.drawString(lineas, 600, 358);
  		
  		//cuadrado para lineas
@@ -23,8 +29,9 @@ public class Puntaje {
  		g2d.setColor(new Color(222, 27, 82));
  		g2d.drawRect(575, 390, 110, 35);
  		g2d.setFont(new Font("Rubik", Font.PLAIN, 30));
- 		String puntaje = "" + lineasBorradas*10;
+ 		String puntaje = "" + Tablero.lineasBorradas*10;
  		g2d.drawString(puntaje, 600, 417);
- 	}*/
+ 	}
+	
 
 }

@@ -60,7 +60,6 @@ public class Tablero implements Dibujable {
 				insertarFiguraEnTablero();				
 				figuraActual = creadorDeFiguras.crearUnaFigura();
 				borrarLinea();
-				System.out.println("lineas borradas" + lineasBorradas);
 		}
 		
 	}
@@ -192,7 +191,7 @@ public class Tablero implements Dibujable {
 				size --;			
 			}
 			if (count == 10) {
-				lineasBorradas = lineasBorradas+1;
+				lineasBorradas++;
 			}
 		}
 	}
@@ -212,32 +211,6 @@ public class Tablero implements Dibujable {
 			}
 		}
 		figuraActual.dibujarse(graphics);
-        
-//		int size = matrizTablero.length - 1;
-//	
-//		for(int i = matrizTablero.length - 1; i > 0; i--)
-//		{
-//			int count = 0;
-//			for(int j = 0; j < matrizTablero[0].length; j++)
-//			{
-//				if(matrizTablero[i][j] != 0) 
-//					
-//					count++;
-//				System.out.println("count " + count);
-//				
-//				
-//				matrizTablero[size][j] = matrizTablero[i][j];
-//				
-//				
-//				
-//				
-//			}
-//			if(count < matrizTablero[0].length)			
-//				size --;
-//			System.out.println("size " + size); 
-//				
-//	
-//		}
 	}
 
 }
