@@ -11,15 +11,11 @@ public abstract class Figura implements Dibujable {
 	protected int[][] matrizFigura;
 	protected int posicionX;
 	protected int posicionY;
-    protected int velocidadX;
-	protected int velocidadY;
-	private ConversoDeImagen conversoDeImagen;
+    private ConversoDeImagen conversoDeImagen;
 
 	public Figura(int posicionX, int posicionY, String color, ConversoDeImagen conversoDeImagen) {
 		this.posicionX = posicionX;
 		this.posicionY = posicionY;
-		this.velocidadX = 0;
-		this.velocidadY = 1;
 		this.color = color;
 		matrizFigura = new int[4][4];
 		this.conversoDeImagen = conversoDeImagen;
@@ -90,11 +86,6 @@ public abstract class Figura implements Dibujable {
 		return nuevaMatriz;
 	}
 
-	public void frenar() {
-		this.velocidadY = 0;
-		this.velocidadX = 0;
-	}
-	
 	public void moverseAbajo() {
 		this.posicionY++;
 	}
@@ -132,23 +123,8 @@ public abstract class Figura implements Dibujable {
 		return posicionY;
 	}
 
-	public int getVelocidadX() {
-		return velocidadX;
-	}
-
-	public void setVelocidadX(int velocidadX) {
-		this.velocidadX = velocidadX;
-	}
-
-	public int getVelocidadY() {
-		return velocidadY;
-	}
-
-	public void setVelocidadY(int velocidadY) {
-		this.velocidadY = velocidadY;
-	}
-
-	public void setPosicionY(int posicionY) {
+	
+    public void setPosicionY(int posicionY) {
 		this.posicionY = posicionY;
 	}
 
