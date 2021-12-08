@@ -37,8 +37,6 @@ public abstract class Figura implements Dibujable {
 							ANCHO_CELDA, LARGO_CELDA, null);
 				}
 			}
-			// borrar esta linea después
-			System.out.println("posicion x sin girar: " + posicionX);
 
 		}
 	}

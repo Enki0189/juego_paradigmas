@@ -66,8 +66,19 @@
  		String mensaje = "PRESIONA LA BARRA ESPACIADORA PARA INICIAR";
  		g2d.drawString(mensaje, anchoJuego - 530, 65);
  	}
+ 	
+ 	private void mensajeGameOver(Graphics2D g2d) {
+ 		g2d.setColor(new Color(0, 0, 0));
+ 		g2d.fillRect(200, 200, 400, 100);
+ 		g2d.setColor(Color.white);
+ 		g2d.drawRect(200, 200, 400, 100);
+ 		g2d.setColor(Color.white);
+ 		String mensaje = "GAME OVER";
+ 		g2d.setFont(new Font("Rubik", Font.PLAIN, 50));
+ 		g2d.drawString(mensaje, 260, 265);
+ 	}
 
-
+ 
  	@Override 
  	public void run() {
  		while (true) {
@@ -107,7 +118,12 @@
  		if (pantalla == GAME_SCREEN) {
  			dibujarPantalla(graphics2d, fondoJuego);
  			//super.paintComponent(g);
- 			tablero.dibujarse(g);
+ 			
+ 				tablero.dibujarse(g);
+ 			 			
+ 			if (tablero.gameOver == true) {
+ 				mensajeGameOver(graphics2d);
+ 			}
  		}
  		if(gamePaused)
  		{
@@ -123,11 +139,17 @@
  			//40 Veces 25 milisegundos es un segundo. Entonces cada 1 segundo cae la figura.
  			if(contadorTiempoCaida == 40) {
  				contadorTiempoCaida = 0;
+ 				if (tablero.gameOver == false) {
  				tablero.actualizar();
+ 				}
  			}
  			contadorTiempoCaida++;
  		}
      }
+ 	
+ 
+ 	
+ 	
  	@Override
  	public void mouseDragged(MouseEvent e) {
  		
