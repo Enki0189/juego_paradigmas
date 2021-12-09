@@ -116,7 +116,6 @@
  			
  			tablero.dibujarse(g);
  			Puntaje.infoEnPantalla(graphics2d);
- 			System.out.println("contadorTiempoCaida " + contadorTiempoCaida);
  			if (tablero.gameOver == true) {
  				mensajeGameOver(graphics2d);
  			}
@@ -133,15 +132,33 @@
  	private void actualizarAmbiente() {
  		if (pantalla == GAME_SCREEN) {
  			//40 Veces 25 milisegundos es un segundo. Entonces cada 1 segundo cae la figura.
- 			if(contadorTiempoCaida == 40) {
- 				contadorTiempoCaida = 0;
- 				if (tablero.gameOver == false) {
- 					tablero.actualizar();
- 				}
+ 			if (Tablero.level == 1) {
+	 			if(contadorTiempoCaida == 40) {
+	 				contadorTiempoCaida = 0;
+	 				if (tablero.gameOver == false) {
+	 					tablero.actualizar();
+	 				}
+	 			}
+	 			contadorTiempoCaida++;
+ 			} else if (Tablero.level == 2) {
+ 				if(contadorTiempoCaida == 20) {
+ 	 				contadorTiempoCaida = 0;
+ 	 				if (tablero.gameOver == false) {
+ 	 					tablero.actualizar();
+ 	 				}
+ 	 			}
+ 	 			contadorTiempoCaida++;
+ 			} else if (Tablero.level == 3) {
+ 				if(contadorTiempoCaida == 10) {
+ 	 				contadorTiempoCaida = 0;
+ 	 				if (tablero.gameOver == false) {
+ 	 					tablero.actualizar();
+ 	 				}
+ 	 			}
+ 	 			contadorTiempoCaida++;
  			}
- 			contadorTiempoCaida++;
  		}
-     }
+ 	}
 
  	
  

@@ -106,9 +106,7 @@ public class Tablero implements Dibujable {
 		if (puntaje >= 400) {
 			level = 3;
 		} 
-		if (puntaje >= 600) {
-			level = 4;
-		}
+
 	}
 
 	// Los 4 metodos de abajo se van a usar para el teclado.
