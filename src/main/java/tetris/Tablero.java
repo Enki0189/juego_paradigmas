@@ -17,6 +17,9 @@ public class Tablero implements Dibujable {
 	protected int posicionX;
 	protected int posicionY;
 	public static int lineasBorradas = 0;
+	public static int lineasAcumuladas = 0;
+	public static int puntaje = 0;
+	public boolean seBorroLinea = false;
 	public boolean gameOver = false;
 	
 	public Tablero (ConversoDeImagen conversoDeImagen) {
@@ -61,7 +64,21 @@ public class Tablero implements Dibujable {
 				figuraActual = creadorDeFiguras.crearUnaFigura();
 				borrarLinea();
 		}
+		acumularPuntaje();
 		
+	}
+	
+	public void acumularPuntaje() {
+			lineasAcumuladas = lineasAcumuladas + lineasBorradas;
+			if (lineasBorradas == 1) {
+				puntaje = puntaje + 10;
+			} else if (lineasBorradas < 4) {
+				puntaje = puntaje + (lineasBorradas*15);
+			} else {
+				puntaje = puntaje + (lineasBorradas*20);
+			}
+			lineasBorradas = 0;
+
 	}
 	
 	//Los 4 metodos de abajo se van a usar para el teclado. 
@@ -192,6 +209,9 @@ public class Tablero implements Dibujable {
 			}
 			if (count == 10) {
 				lineasBorradas++;
+				//seBorroLinea = true;
+			} else {
+				//seBorroLinea = false;
 			}
 		}
 	}

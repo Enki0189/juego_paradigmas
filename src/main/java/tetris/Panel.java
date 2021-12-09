@@ -27,15 +27,15 @@
      private Image fondoJuego = ImageLoader.loadImage("/Fondo_juego.png");
      private boolean gamePaused = false;
      private int contadorTiempoCaida = 0;
-     private int puntaje;
+
 
  	public Panel(int anchoJuego, int largoJuego) {
  		this.pantalla = WELCOME_SCREEN;
  		this.anchoJuego = anchoJuego;
  		this.largoJuego = largoJuego;
  		tablero = new Tablero(new ConversoDeImagen("src/main/resources/imagenes/"));
-         music = ImageLoader.LoadSound("/Tetris_theme.wav");
-         music = ImageLoader.LoadSound("/Tetris_theme.wav");
+        music = ImageLoader.LoadSound("/Tetris_theme.wav");
+        music = ImageLoader.LoadSound("/Tetris_theme.wav");
  		music.loop(Clip.LOOP_CONTINUOUSLY);
 
 
