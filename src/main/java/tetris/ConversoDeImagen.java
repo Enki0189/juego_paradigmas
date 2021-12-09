@@ -14,17 +14,13 @@ public class ConversoDeImagen {
 
 	public ConversoDeImagen(String path) {
 		imagenesPorColor = new HashMap<>();
-		try {
-			imagenesPorColor.put("NARANJA", ImageIO.read(new File(path, "pieza_naranja_un_bloque.png")));
-			imagenesPorColor.put("ROJO", ImageIO.read(new File(path, "pieza_roja_un_bloque.png")));
-			imagenesPorColor.put("VERDE", ImageIO.read(new File(path, "pieza_verde_un_bloque.png")));
-			imagenesPorColor.put("VIOLETA", ImageIO.read(new File(path, "pieza_violeta_un_bloque.png")));
-			imagenesPorColor.put("AZUL", ImageIO.read(new File(path, "pieza_azul_un_bloque.png")));
-			imagenesPorColor.put("AMARILLO", ImageIO.read(new File(path, "pieza_amarilla_un_bloque.png")));
-			imagenesPorColor.put("CELESTE", ImageIO.read(new File(path, "pieza_celeste_un_bloque.png")));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		imagenesPorColor.put("NARANJA", ImageLoader.loadImage( path + "pieza_naranja_un_bloque.png"));
+		imagenesPorColor.put("ROJO", ImageLoader.loadImage( path + "pieza_roja_un_bloque.png"));
+		imagenesPorColor.put("VERDE", ImageLoader.loadImage( path + "pieza_verde_un_bloque.png"));
+		imagenesPorColor.put("VIOLETA", ImageLoader.loadImage( path + "pieza_violeta_un_bloque.png"));
+		imagenesPorColor.put("AZUL", ImageLoader.loadImage( path + "pieza_azul_un_bloque.png"));
+		imagenesPorColor.put("AMARILLO", ImageLoader.loadImage( path + "pieza_amarilla_un_bloque.png"));
+		imagenesPorColor.put("CELESTE", ImageLoader.loadImage( path + "pieza_celeste_un_bloque.png"));
 	}
 	
 	public BufferedImage getImagen(String color) {
