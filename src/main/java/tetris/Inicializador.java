@@ -18,16 +18,17 @@ public class Inicializador {
         
         ventanaJuego.setVisible(true);
         
-        //agrego para que no se pueda cambiar el tama�o de la ventana luego de setearlo
+        //agrego para que no se pueda cambiar el tamao de la ventana luego de setearlo
         ventanaJuego.setResizable(false);
         
         Panel panel= new Panel (anchoVentana, largoVentana);
 
         ventanaJuego.add(panel);
+        
         ventanaJuego.pack();
+        
         ventanaJuego.setLocationRelativeTo(null);
          
-        ventanaJuego.addMouseMotionListener(panel);
         ventanaJuego.addKeyListener(panel);      
         
         panel.run();

@@ -14,26 +14,20 @@
  import javax.swing.JPanel;
 
 
-
-
-
- public class Panel extends JPanel implements Runnable, MouseMotionListener, KeyListener {
-
- 	private static final long serialVersionUID = 1L;
- 	private int pantalla;
- 	private final static int WELCOME_SCREEN = 1;
- 	private final static int GAME_SCREEN = 2;
- 	private int anchoJuego;
- 	private int largoJuego;
-    private Tablero tablero;
-    private Clip music;
-    private Image pantallaBienvenida = ImageLoader.loadImage("/tetrisInicio.png");
-    private Image fondoJuego = ImageLoader.loadImage("/Fondo_juego.png");
-    //private boolean gamePaused = false;
-    //private int mouseX, mouseY;
- 	//private boolean leftClick = false;
- 	//private Rectangle stopBounds, refreshBounds;
- 	//private BufferedImage  pause, refresh;
+ public class Panel extends JPanel implements Runnable, KeyListener {
+    
+     private static final long serialVersionUID = 1L;
+ 	 private int pantalla;
+ 	 private final static int WELCOME_SCREEN = 1;
+ 	 private final static int GAME_SCREEN = 2;
+ 	 private int anchoJuego;
+ 	 private int largoJuego;
+     private Tablero tablero;
+     private Clip music;
+     private Image pantallaBienvenida = ImageLoader.loadImage("/tetrisInicio.png");
+     private Image fondoJuego = ImageLoader.loadImage("/Fondo_juego.png");
+     //private boolean gamePaused = false;
+     private int contadorTiempoCaida = 0;
 
 
 
@@ -42,8 +36,8 @@
  		this.anchoJuego = anchoJuego;
  		this.largoJuego = largoJuego;
  		tablero = new Tablero(new ConversoDeImagen("src/main/resources/imagenes/"));
-         music = ImageLoader.LoadSound("/Tetris_theme.wav");
-         music = ImageLoader.LoadSound("/Tetris_theme.wav");
+        music = ImageLoader.LoadSound("/Tetris_theme.wav");
+        music = ImageLoader.LoadSound("/Tetris_theme.wav");
  		music.loop(Clip.LOOP_CONTINUOUSLY);
 
 
@@ -59,22 +53,33 @@
  	
  	private void mostrarMensaje(Graphics2D g2d) {
  		g2d.setColor(new Color(0, 0, 0));
- 		g2d.fillRect(60, largoJuego - 565, anchoJuego - 130, 50);
+ 		g2d.fillRect(150, largoJuego - 570, anchoJuego - 290, 50);
  		g2d.setColor(Color.white);
- 		g2d.drawRect(60, largoJuego - 565, anchoJuego - 130, 50);
+ 		g2d.drawRect(150, largoJuego - 570, anchoJuego - 290, 50);
  		String mensaje = "PRESIONA LA BARRA ESPACIADORA PARA INICIAR";
- 		g2d.drawString(mensaje, anchoJuego - 530, 65);
+ 		g2d.setFont(new Font("Rubik", Font.PLAIN, 20));
+ 		g2d.drawString(mensaje, anchoJuego - 640, 65);
+ 	}
+ 	
+ 	private void mensajeGameOver(Graphics2D g2d) {
+ 		g2d.setColor(new Color(0, 0, 0));
+ 		g2d.fillRect(200, 200, 400, 100);
+ 		g2d.setColor(Color.white);
+ 		g2d.drawRect(200, 200, 400, 100);
+ 		g2d.setColor(Color.white);
+ 		String mensaje = "GAME OVER";
+ 		g2d.setFont(new Font("Rubik", Font.PLAIN, 50));
+ 		g2d.drawString(mensaje, 260, 265);
  	}
 
 
+ 
  	@Override 
  	public void run() {
  		while (true) {
              actualizarAmbiente();
              repintar();
-             esperar(1000);
-             //esperar(50);
-             //moverFigura();
+             esperar(25);
  		}
  	}
  	
@@ -108,7 +113,14 @@
  		if (pantalla == GAME_SCREEN) {
  			dibujarPantalla(graphics2d, fondoJuego);
  			//super.paintComponent(g);
+ 			
  			tablero.dibujarse(g);
+ 			Puntaje.infoEnPantalla(graphics2d);
+ 			 			
+ 			if (tablero.gameOver == true) {
+ 				mensajeGameOver(graphics2d);
+ 			}
+
  		}
  		/*if(gamePaused) {
  			String gamePausedString = "GAME PAUSED";
@@ -120,20 +132,25 @@
 
  	private void actualizarAmbiente() {
  		if (pantalla == GAME_SCREEN) {
- 			tablero.actualizar();
+ 			//40 Veces 25 milisegundos es un segundo. Entonces cada 1 segundo cae la figura.
+ 			if(contadorTiempoCaida == 40) {
+ 				contadorTiempoCaida = 0;
+ 				if (tablero.gameOver == false) {
+ 					tablero.actualizar();
+ 				}
+ 			}
+ 			contadorTiempoCaida++;
+ 			
  		}
      }
- 	@Override
- 	public void mouseDragged(MouseEvent e) {
- 		
- 	}
+
  	
- 	@Override
- 	public void mouseMoved(MouseEvent e) {
- 	}
+ 
+ 	
  	@Override
  	public void keyTyped(KeyEvent e) {
  	}
+ 	
  	@Override
  	public void keyPressed(KeyEvent arg0) {
  		if (pantalla == GAME_SCREEN) {
@@ -165,7 +182,4 @@
  		
  	}
 
-
-
-
- }
+}
