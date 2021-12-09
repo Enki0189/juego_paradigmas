@@ -53,20 +53,28 @@ public class Tablero implements Dibujable {
 		this.conversoDeImagen = conversoDeImagen;
 		this.creadorDeFiguras = new CreadorDeFiguras(conversoDeImagen);
 		figuraActual = creadorDeFiguras.crearUnaFigura();
+		proximaFigura = creadorDeFiguras.crearUnaFigura();
+		proximaFigura.setPosicionX(10);
+		proximaFigura.setPosicionY(3);
 	}
 
 	public void actualizar() {
 		if (gameOver == false ) {
-			
 			figuraActual.moverseAbajo();
 			if (figuraCayo()) {
 				figuraActual.retroceder();
 				insertarFiguraEnTablero();
 				hayColisionArriba();
 				if (gameOver == false) {
-					figuraActual = creadorDeFiguras.crearUnaFigura();
-					figuraActual.retroceder();  
+					figuraActual = proximaFigura;
+					figuraActual.setPosicionX(2);
+					figuraActual.setPosicionY(1); 
+					proximaFigura = creadorDeFiguras.crearUnaFigura();
+					proximaFigura.setPosicionX(10);
+					proximaFigura.setPosicionY(3);
+					
 					borrarLinea();
+					
 				}
 				
 			}
@@ -241,6 +249,7 @@ public class Tablero implements Dibujable {
 			}
 		}
 		figuraActual.dibujarse(graphics);
+		proximaFigura.dibujarse(graphics);
 	}
 
 }
