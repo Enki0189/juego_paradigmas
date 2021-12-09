@@ -35,5 +35,7 @@ public class CreadorDeFiguras {
         return fabricasDeFiguras.get((int) (Math.random() * fabricasDeFiguras.size())).fabricarFigura();
 
 	}
+    
+   
 
 }

@@ -14,6 +14,7 @@ public class Tablero implements Dibujable {
 	private CreadorDeFiguras creadorDeFiguras;
 	private ConversoDeImagen conversoDeImagen;
 	private Figura figuraActual;
+	private Figura proximaFigura;
 	protected int posicionX;
 	protected int posicionY;
 	public static int lineasBorradas = 0;
@@ -60,11 +61,17 @@ public class Tablero implements Dibujable {
 		figuraActual.moverseAbajo();		
 			if(figuraCayo()) {
 				figuraActual.retroceder();
-				insertarFiguraEnTablero();				
-				figuraActual = creadorDeFiguras.crearUnaFigura();
-				borrarLinea();
-		}
-		acumularPuntaje();
+				insertarFiguraEnTablero();	
+				if (gameOver == false ) {
+					figuraActual = creadorDeFiguras.crearUnaFigura();
+					borrarLinea();
+				} else {
+					figuraActual = null;
+				}
+				
+				
+		    }
+		    acumularPuntaje();
 		
 	}
 	
