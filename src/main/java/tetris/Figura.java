@@ -28,8 +28,12 @@ public abstract class Figura implements Dibujable {
 				if (matrizFigura[i][j] != 0) {
 					int posx = (posicionX + j) * ANCHO_CELDA;
 					int posy = (posicionY + i) * LARGO_CELDA;
-					graphics.drawImage(conversoDeImagen.getImagen(this.color), posx + MARGEN_IZQUIERDO, posy,
-							ANCHO_CELDA, LARGO_CELDA, null);
+					if ((posicionY + i) >= 2) {
+						graphics.drawImage(conversoDeImagen.getImagen(this.color), posx + MARGEN_IZQUIERDO, 
+								posy, ANCHO_CELDA, LARGO_CELDA, null);
+					}
+					
+					
 				}
 			}
 		}

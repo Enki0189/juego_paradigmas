@@ -13,7 +13,7 @@ public class FabricaFiguraT extends FabricaDeFiguras{
 
 	@Override
 	public Figura fabricarFigura() {
-		return new FiguraT(2,2, "VIOLETA", conversoDeImagen);
+		return new FiguraT(2, 2, "VIOLETA", conversoDeImagen);
 	}
 
 }
