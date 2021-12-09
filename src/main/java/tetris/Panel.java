@@ -116,7 +116,7 @@
  			
  			tablero.dibujarse(g);
  			Puntaje.infoEnPantalla(graphics2d);
- 			 			
+ 			System.out.println("contadorTiempoCaida " + contadorTiempoCaida);
  			if (tablero.gameOver == true) {
  				mensajeGameOver(graphics2d);
  			}
@@ -140,7 +140,6 @@
  				}
  			}
  			contadorTiempoCaida++;
- 			
  		}
      }
 

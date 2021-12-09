@@ -21,6 +21,7 @@ public class Tablero implements Dibujable {
 	public static int puntaje = 0;
 	public boolean seBorroLinea = false;
 	public boolean gameOver = false;
+	public static int level = 1;
 
 	public Tablero(ConversoDeImagen conversoDeImagen) {
 		this.matrizTablero = new int[][] { { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
@@ -81,6 +82,7 @@ public class Tablero implements Dibujable {
 				
 		}
 		acumularPuntaje();
+		nivel();
    } 
 	
 
@@ -95,6 +97,18 @@ public class Tablero implements Dibujable {
 		}
 		lineasBorradas = 0;
 
+	}
+	
+	public void nivel() {
+		if(puntaje >= 200) {
+			level = 2;
+		} 
+		if (puntaje >= 400) {
+			level = 3;
+		} 
+		if (puntaje >= 600) {
+			level = 4;
+		}
 	}
 
 	// Los 4 metodos de abajo se van a usar para el teclado.
@@ -226,9 +240,6 @@ public class Tablero implements Dibujable {
 			}
 			if (count == 10) {
 				lineasBorradas++;
-				// seBorroLinea = true;
-			} else {
-				// seBorroLinea = false;
 			}
 		}
 	}

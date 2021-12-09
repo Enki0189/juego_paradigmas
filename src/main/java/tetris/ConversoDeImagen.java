@@ -20,6 +20,8 @@ public class ConversoDeImagen {
 			imagenesPorColor.put("VERDE", ImageIO.read(new File(path, "pieza_verde_un_bloque.png")));
 			imagenesPorColor.put("VIOLETA", ImageIO.read(new File(path, "pieza_violeta_un_bloque.png")));
 			imagenesPorColor.put("AZUL", ImageIO.read(new File(path, "pieza_azul_un_bloque.png")));
+			imagenesPorColor.put("AMARILLO", ImageIO.read(new File(path, "pieza_amarilla_un_bloque.png")));
+			imagenesPorColor.put("CELESTE", ImageIO.read(new File(path, "pieza_celeste_un_bloque.png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -40,6 +42,10 @@ public class ConversoDeImagen {
 			return imagenesPorColor.get("VIOLETA");
 		} else if(n == 5) {
 			return imagenesPorColor.get("AZUL");
+		} else if (n == 6) {
+			return imagenesPorColor.get("AMARILLO");
+		} else if (n == 7) {
+			return imagenesPorColor.get("CELESTE");
 		}
 		
 		//Si es otro numero retorna siempre azul

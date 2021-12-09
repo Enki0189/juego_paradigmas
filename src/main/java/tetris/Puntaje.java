@@ -8,13 +8,13 @@ public class Puntaje {
 	public static int lineasAcumuladas = Tablero.lineasAcumuladas;
 	public static int lineasBorradasPorTurno;
 	public int puntaje;
-	public static int level = 1;
+	
 	
 	public Puntaje(int puntaje, int lineasAcumuladas) {
 		Puntaje.lineasAcumuladas = lineasAcumuladas;
 		this.puntaje = puntaje;
 		Puntaje.lineasBorradasPorTurno = Tablero.lineasBorradas;
-		//nivel();
+		
 	}
 	
 	public static void infoEnPantalla(Graphics2D g2d) {
@@ -24,7 +24,7 @@ public class Puntaje {
  		g2d.setColor(new Color(222, 27, 82));
  		g2d.drawRect(575, 264, 110, 35);
  		g2d.setFont(new Font("Rubik", Font.PLAIN, 30));
- 		String nivel = "" + level;
+ 		String nivel = "" + Tablero.level;
  		g2d.drawString(nivel, 600, 290);
 		
  		//cuadrado para lineas
@@ -47,13 +47,6 @@ public class Puntaje {
  		
  	}
 	
-	/*public void nivel() {
-		if(Tablero.puntaje > 200) {
-			level++;
-		} else if (Tablero.puntaje > 400) {
-			level++;
-		}
-	}*/
 	
 
 }

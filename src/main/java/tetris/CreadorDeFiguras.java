@@ -10,6 +10,8 @@ import tetris.fabricafiguras.FabricaFiguraI;
 import tetris.fabricafiguras.FabricaFiguraL;
 import tetris.fabricafiguras.FabricaFiguraT;
 import tetris.fabricafiguras.FabricaFiguraZ;
+import tetris.fabricafiguras.FabricaFiguraLInvertida;
+import tetris.fabricafiguras.FabricaFiguraZInvertida;
 
 public class CreadorDeFiguras {
 	
@@ -28,6 +30,8 @@ public class CreadorDeFiguras {
     	fabricasDeFiguras.add(new FabricaFiguraZ(conversoDeImagenes));
     	fabricasDeFiguras.add(new FabricaFiguraT(conversoDeImagenes));
     	fabricasDeFiguras.add(new FabricaFiguraCuadrado(conversoDeImagenes));
+    	fabricasDeFiguras.add(new FabricaFiguraLInvertida(conversoDeImagenes));
+    	fabricasDeFiguras.add(new FabricaFiguraZInvertida(conversoDeImagenes));
 	}
     
     public Figura crearUnaFigura() {
