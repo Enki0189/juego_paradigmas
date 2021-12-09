@@ -152,8 +152,9 @@ public class Tablero implements Dibujable {
 			}
 		}
 		figuraActual.dibujarse(graphics);
+		// borra la linea completa de 1 en la matrix 
         int size = matrizTablero.length - 1;
-		
+
 		for(int i = matrizTablero.length - 1; i > 0; i--)
 		{
 			int count = 0;
@@ -164,8 +165,9 @@ public class Tablero implements Dibujable {
 				
 				matrizTablero[size][j] = matrizTablero[i][j];
 			}
-			if(count < matrizTablero[0].length)
+			if(count < matrizTablero[0].length) {
 				size --;
+			}
 		}
 	}
 

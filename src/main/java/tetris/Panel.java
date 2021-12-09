@@ -25,12 +25,12 @@
  	private final static int GAME_SCREEN = 2;
  	private int anchoJuego;
  	private int largoJuego;
-     private Tablero tablero;
-     private Clip music;
-     private Image pantallaBienvenida = ImageLoader.loadImage("/tetrisInicio.png");
-     private Image fondoJuego = ImageLoader.loadImage("/Fondo_juego.png");
-     private boolean gamePaused = false;
-     //private int mouseX, mouseY;
+    private Tablero tablero;
+    private Clip music;
+    private Image pantallaBienvenida = ImageLoader.loadImage("/tetrisInicio.png");
+    private Image fondoJuego = ImageLoader.loadImage("/Fondo_juego.png");
+    //private boolean gamePaused = false;
+    //private int mouseX, mouseY;
  	//private boolean leftClick = false;
  	//private Rectangle stopBounds, refreshBounds;
  	//private BufferedImage  pause, refresh;
@@ -110,13 +110,12 @@
  			//super.paintComponent(g);
  			tablero.dibujarse(g);
  		}
- 		if(gamePaused)
- 		{
+ 		/*if(gamePaused) {
  			String gamePausedString = "GAME PAUSED";
  			g.setColor(Color.WHITE);
  			g.setFont(new Font("Georgia", Font.BOLD, 30));
  			g.drawString(gamePausedString, 35, largoJuego/2);
- 		}
+ 		}*/
  	}
 
  	private void actualizarAmbiente() {
