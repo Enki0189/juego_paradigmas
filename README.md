@@ -20,6 +20,7 @@ Es posible pausar el juego y luego retomarlo.
 ![Captura4](https://user-images.githubusercontent.com/82178152/145594042-0e42d53a-cea9-4361-ae34-9a02c1f3daef.JPG)
 
 El jugador pierde cuando la matriz de juego se llena hasta su borde superior. En ese momento se le da la oportunidad de volver al inicio e intentar de nuevo.
+
 ![Captura5](https://user-images.githubusercontent.com/82178152/145594100-00683356-c45b-419a-a817-e2aeb4b1f6bb.JPG)
 
 
