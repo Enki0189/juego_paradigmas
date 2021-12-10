@@ -8,8 +8,6 @@
  import java.awt.Image;
  import java.awt.event.KeyEvent;
  import java.awt.event.KeyListener;
- import java.awt.event.MouseEvent;
- import java.awt.event.MouseMotionListener;
  import javax.sound.sampled.Clip;
  import javax.swing.JPanel;
 
@@ -24,8 +22,8 @@
  	 private int largoJuego;
      private Tablero tablero;
      private Clip music;
-     private Image pantallaBienvenida = ImageLoader.loadImage("/tetrisInicio.png");
-     private Image fondoJuego = ImageLoader.loadImage("/Fondo_juego.png");
+     private Image pantallaBienvenida = ImageLoader.loadImage("/imagenes/tetrisInicio.png");
+     private Image fondoJuego = ImageLoader.loadImage("/imagenes/Fondo_juego.png");
      private int contadorTiempoCaida = 0;
      public long startTime;
      long elapsedTime;
@@ -39,7 +37,7 @@
  	 this.anchoJuego = anchoJuego;
  	 this.largoJuego = largoJuego;
  	 tablero = new Tablero(new ConversoDeImagen("/imagenes/"));
-     music = ImageLoader.LoadSound("/Tetris_theme.wav");
+     music = ImageLoader.LoadSound("/sonidos/Tetris_theme.wav");
      music.loop(Clip.LOOP_CONTINUOUSLY);
  	
  }
