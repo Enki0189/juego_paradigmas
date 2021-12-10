@@ -17,7 +17,7 @@
  public class Panel extends JPanel implements Runnable, KeyListener {
     
      private static final long serialVersionUID = 1L;
- 	 private int pantalla;
+ 	 public int pantalla;
  	 private final static int WELCOME_SCREEN = 1;
  	 private final static int GAME_SCREEN = 2;
  	 private int anchoJuego;
@@ -26,8 +26,13 @@
      private Clip music;
      private Image pantallaBienvenida = ImageLoader.loadImage("/tetrisInicio.png");
      private Image fondoJuego = ImageLoader.loadImage("/Fondo_juego.png");
-     //private boolean gamePaused = false;
      private int contadorTiempoCaida = 0;
+     public long startTime;
+     long elapsedTime;
+     static long elapsedSeconds;
+     static long secondsDisplay;
+     static long elapsedMinutes;
+     static long minutesDisplay;
 
  	public Panel(int anchoJuego, int largoJuego) {
  		this.pantalla = WELCOME_SCREEN;
@@ -37,9 +42,7 @@
         music = ImageLoader.LoadSound("/Tetris_theme.wav");
         music = ImageLoader.LoadSound("/Tetris_theme.wav");
  		music.loop(Clip.LOOP_CONTINUOUSLY);
- 		
-
-
+ 	
  	}
 
  	private void dibujarPantalla(Graphics g, Image screen) {
@@ -155,9 +158,23 @@
  	 				}
  	 			}
  	 			contadorTiempoCaida++;
+ 			} else if (Tablero.level == 4) {
+ 				if(contadorTiempoCaida == 5) {
+ 	 				contadorTiempoCaida = 0;
+ 	 				if (tablero.gameOver == false) {
+ 	 					tablero.actualizar();
+ 	 				}
+ 	 			}
+ 	 			contadorTiempoCaida++;
  			}
  		}
- 	}
+
+
+ 		if (pantalla == GAME_SCREEN && tablero.gameOver == false) {
+ 			contarTiempo();
+ 		}
+ 	} 
+ 	
  	@Override
  	public void keyTyped(KeyEvent e) {
  	}
@@ -184,6 +201,7 @@
          if (arg0.getKeyCode() == KeyEvent.VK_SPACE && pantalla == WELCOME_SCREEN  ) {
          	actualizarAmbiente();
          	pantalla = GAME_SCREEN;
+     		iniciarTiempo();
          }
          if (arg0.getKeyCode() == KeyEvent.VK_P && pantalla == GAME_SCREEN ) {
           	tablero.gamePause = true;
@@ -201,7 +219,21 @@
            }
          
      }
+ 	
  	@Override
  	public void keyReleased(KeyEvent e) {
  	}
+
+ 	
+	public void iniciarTiempo() {
+		startTime = System.currentTimeMillis();
+	}
+	
+	public void contarTiempo() {
+		elapsedTime = System.currentTimeMillis() - startTime;
+		elapsedSeconds = elapsedTime / 1000;
+		secondsDisplay = elapsedSeconds % 60;
+		elapsedMinutes = elapsedSeconds / 60;
+		minutesDisplay = elapsedMinutes % 60;
+	}
 }

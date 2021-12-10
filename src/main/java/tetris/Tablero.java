@@ -23,6 +23,7 @@ public class Tablero implements Dibujable {
 	public boolean gameOver = false;
 	public boolean gamePause = false;
 	public static int level = 1;
+	
 
 	public Tablero(ConversoDeImagen conversoDeImagen) {
 		this.matrizTablero = new int[][] { { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
@@ -75,8 +76,7 @@ public class Tablero implements Dibujable {
 					proximaFigura.setPosicionX(10);
 					proximaFigura.setPosicionY(3);
 					
-					borrarLinea();
-					
+					borrarLinea();					
 				}
 				
 			}
@@ -106,9 +106,13 @@ public class Tablero implements Dibujable {
 		} 
 		if (puntaje >= 400) {
 			level = 3;
-		} 
+		}
+		if (puntaje >= 600) {
+			level = 4;
+		}
 
 	}
+
 
 	// Los 4 metodos de abajo se van a usar para el teclado.
 	public void moverFiguraActualDerecha() {

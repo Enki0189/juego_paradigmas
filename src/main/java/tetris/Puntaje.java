@@ -18,6 +18,24 @@ public class Puntaje {
 	}
 	
 	public static void infoEnPantalla(Graphics2D g2d) {
+		//cuadrado para tiempo
+		g2d.setColor(new Color(0, 0, 0));
+ 		g2d.fillRect(575, 203, 110, 35);
+ 		g2d.setColor(new Color(222, 27, 82));
+ 		g2d.drawRect(575, 203, 110, 35);
+ 		g2d.setFont(new Font("Rubik", Font.PLAIN, 30));
+ 		String tiempo = ""; 
+ 		if (Panel.minutesDisplay < 10 && Panel.secondsDisplay < 10) {
+ 			tiempo = "0" + Panel.minutesDisplay + ":0" + Panel.secondsDisplay;
+ 		} else if (Panel.minutesDisplay < 10 && Panel.secondsDisplay >= 10 ) {
+ 			tiempo = "0" + Panel.minutesDisplay + ":" + Panel.secondsDisplay;
+ 		} else if (Panel.minutesDisplay >= 10 && Panel.secondsDisplay < 10 ) {
+ 			tiempo = "" + Panel.minutesDisplay + ":0" + Panel.secondsDisplay;
+ 		} else {
+ 			tiempo = "" + Panel.minutesDisplay + ":" + Panel.secondsDisplay;
+ 		}
+ 		g2d.drawString(tiempo, 590, 230);
+		
 		//cuadrado para nivel
  		g2d.setColor(new Color(0, 0, 0));
  		g2d.fillRect(575, 264, 110, 35);
