@@ -210,6 +210,10 @@
         	repintar();
         	pantalla = WELCOME_SCREEN; 
            	tablero = new Tablero(new ConversoDeImagen("/imagenes/"));
+           	tablero.lineasAcumuladas = 0;
+           	tablero.level = 1;
+           	tablero.puntaje = 0;
+           	tablero.lineasBorradas = 0;
            	tablero.gameOver = false;
            	
          }
