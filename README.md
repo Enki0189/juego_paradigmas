@@ -30,3 +30,7 @@ Con tecla R puede volver a jugar
 ![Captura5](https://user-images.githubusercontent.com/82178152/145594100-00683356-c45b-419a-a817-e2aeb4b1f6bb.JPG)
 
 
+Diagrama de clases:
+
+![DiagramaTetris2](https://user-images.githubusercontent.com/82178152/145629427-f2f99358-8ab5-4dd5-aca6-823ec5333b63.png)
+
