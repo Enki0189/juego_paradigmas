@@ -39,7 +39,7 @@
  		this.pantalla = WELCOME_SCREEN;
  		this.anchoJuego = anchoJuego;
  		this.largoJuego = largoJuego;
- 		tablero = new Tablero(new ConversoDeImagen("src/main/resources/imagenes/"));
+ 		tablero = new Tablero(new ConversoDeImagen("/imagenes/"));
         music = ImageLoader.LoadSound("/Tetris_theme.wav");
         music = ImageLoader.LoadSound("/Tetris_theme.wav");
  		music.loop(Clip.LOOP_CONTINUOUSLY);
