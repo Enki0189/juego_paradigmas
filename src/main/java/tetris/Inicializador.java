@@ -38,5 +38,7 @@ public class Inicializador {
         hilo.start(); // ejecuta run en forma de hilo
         
 	}
+	
+	
 
 }

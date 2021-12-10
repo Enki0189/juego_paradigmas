@@ -21,6 +21,7 @@ public class Tablero implements Dibujable {
 	public static int puntaje = 0;
 	public boolean seBorroLinea = false;
 	public boolean gameOver = false;
+	public boolean gamePause = false;
 	public static int level = 1;
 
 	public Tablero(ConversoDeImagen conversoDeImagen) {
@@ -60,13 +61,13 @@ public class Tablero implements Dibujable {
 	}
 
 	public void actualizar() {
-		if (gameOver == false ) {
+		if (gameOver == false && gamePause == false ) {
 			figuraActual.moverseAbajo();
 			if (figuraCayo()) {
 				figuraActual.retroceder();
 				insertarFiguraEnTablero();
 				hayColisionArriba();
-				if (gameOver == false) {
+				if (gameOver == false && gamePause == false) {
 					figuraActual = proximaFigura;
 					figuraActual.setPosicionX(2);
 					figuraActual.setPosicionY(1); 

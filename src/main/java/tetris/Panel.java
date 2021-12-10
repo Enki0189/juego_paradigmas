@@ -29,8 +29,6 @@
      //private boolean gamePaused = false;
      private int contadorTiempoCaida = 0;
 
-
-
  	public Panel(int anchoJuego, int largoJuego) {
  		this.pantalla = WELCOME_SCREEN;
  		this.anchoJuego = anchoJuego;
@@ -39,6 +37,7 @@
         music = ImageLoader.LoadSound("/Tetris_theme.wav");
         music = ImageLoader.LoadSound("/Tetris_theme.wav");
  		music.loop(Clip.LOOP_CONTINUOUSLY);
+ 		
 
 
  	}
@@ -72,7 +71,12 @@
  		g2d.drawString(mensaje, 260, 265);
  	}
 
-
+    private void mensajePause(Graphics2D g) {
+    	String gamePausedString = "GAME PAUSED";
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("Georgia", Font.BOLD, 50));
+		g.drawString(gamePausedString, 150, 300);
+    }
  
  	@Override 
  	public void run() {
@@ -80,6 +84,7 @@
              actualizarAmbiente();
              repintar();
              esperar(25);
+             
  		}
  	}
  	
@@ -98,9 +103,7 @@
 
  	private void repintar() {
          this.repaint();
-
      }
-
 
  	@Override
  	protected void paintComponent (Graphics g) {
@@ -109,7 +112,7 @@
  		if (pantalla == WELCOME_SCREEN) {
  			dibujarPantalla(graphics2d, pantallaBienvenida);
  			mostrarMensaje(graphics2d);
- 		}
+ 			 		}
  		if (pantalla == GAME_SCREEN) {
  			dibujarPantalla(graphics2d, fondoJuego);
  			//super.paintComponent(g);
@@ -119,14 +122,10 @@
  			if (tablero.gameOver == true) {
  				mensajeGameOver(graphics2d);
  			}
-
+ 			if (tablero.gamePause == true) {
+ 				mensajePause(graphics2d);
+ 			}
  		}
- 		/*if(gamePaused) {
- 			String gamePausedString = "GAME PAUSED";
- 			g.setColor(Color.WHITE);
- 			g.setFont(new Font("Georgia", Font.BOLD, 30));
- 			g.drawString(gamePausedString, 35, largoJuego/2);
- 		}*/
  	}
 
  	private void actualizarAmbiente() {
@@ -159,10 +158,6 @@
  			}
  		}
  	}
-
- 	
- 
- 	
  	@Override
  	public void keyTyped(KeyEvent e) {
  	}
@@ -186,16 +181,27 @@
  	        	tablero.rotarFiguraActual();
  	        }
  		}
-         
-         
-         if (arg0.getKeyCode() == KeyEvent.VK_SPACE && pantalla == WELCOME_SCREEN ) {
+         if (arg0.getKeyCode() == KeyEvent.VK_SPACE && pantalla == WELCOME_SCREEN  ) {
          	actualizarAmbiente();
          	pantalla = GAME_SCREEN;
          }
+         if (arg0.getKeyCode() == KeyEvent.VK_P && pantalla == GAME_SCREEN ) {
+          	tablero.gamePause = true;
+         }
+         if (arg0.getKeyCode() == KeyEvent.VK_ENTER && pantalla == GAME_SCREEN ) {
+           	tablero.gamePause = false;
+         }
+         if (arg0.getKeyCode() == KeyEvent.VK_R && tablero.gameOver == true) {
+        	actualizarAmbiente();
+        	repintar();
+        	// faltaria agregar que limpie el panel para volver a jugar
+           	pantalla = WELCOME_SCREEN; 
+           	tablero.gameOver = false;
+           	
+           }
+         
      }
  	@Override
  	public void keyReleased(KeyEvent e) {
- 		
  	}
-
 }
