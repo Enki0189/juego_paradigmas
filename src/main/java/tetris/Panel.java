@@ -65,12 +65,17 @@
  private void mensajeGameOver(Graphics2D g2d) {
      g2d.setColor(new Color(0, 0, 0));
  	 g2d.fillRect(200, 200, 400, 100);
+ 	 g2d.fillRect(150, 450, 500, 70);
  	 g2d.setColor(Color.white);
  	 g2d.drawRect(200, 200, 400, 100);
- 	 g2d.setColor(Color.white);
+ 	 g2d.drawRect(150, 450, 500, 70);
  	 String mensaje = "GAME OVER";
  	 g2d.setFont(new Font("Rubik", Font.PLAIN, 50));
  	 g2d.drawString(mensaje, 260, 265);
+ 	 String mensaje2 = "Presiona R para volver a intentar";
+ 	 g2d.setFont(new Font("Rubik", Font.PLAIN, 30));
+ 	 g2d.drawString(mensaje2, 180, 493);
+ 	 
  }
 
  private void mensajePause(Graphics2D g) {
@@ -128,17 +133,17 @@
  	}
  }
 
- private void actualizarAmbiente() {
-     if (pantalla == GAME_SCREEN) {
- 			//40 Veces 25 milisegundos es un segundo. Entonces cada 1 segundo cae la figura.
+private void actualizarAmbiente() {
+	if (pantalla == GAME_SCREEN) {
+		//40 Veces 25 milisegundos es un segundo. Entonces cada 1 segundo cae la figura.
  	    if (Tablero.level == 1) {
-	 	    if(contadorTiempoCaida == 40) {
-	 		    contadorTiempoCaida = 0;
+ 	    	if(contadorTiempoCaida == 40) {
+ 	    		contadorTiempoCaida = 0;
 	 			if (tablero.gameOver == false) {
 	 		        tablero.actualizar();
 	 	        }
 	        }
-	 			contadorTiempoCaida++;
+	 	contadorTiempoCaida++;
  		} else if (Tablero.level == 2) {
  		    if(contadorTiempoCaida == 20) {
  	 		    contadorTiempoCaida = 0;
@@ -146,7 +151,7 @@
  	 		        tablero.actualizar();
  	 			}
  	 	    }
- 	 			contadorTiempoCaida++;
+ 	 	contadorTiempoCaida++;
  		} else if (Tablero.level == 3) {
  		    if(contadorTiempoCaida == 10) {
  	 		    contadorTiempoCaida = 0;
@@ -157,13 +162,13 @@
  	 		contadorTiempoCaida++;
  	   } else if (Tablero.level == 4) {
  	       if(contadorTiempoCaida == 5) {
- 	 	       contadorTiempoCaida = 0;
+ 	    	   contadorTiempoCaida = 0;
  	 		   if (tablero.gameOver == false) {
  	 		       tablero.actualizar();
  	 		   }
- 	 	  }
- 	 			contadorTiempoCaida++;
- 	  }
+ 	 	   }
+ 	       contadorTiempoCaida++;
+ 	   }
  }
 
 

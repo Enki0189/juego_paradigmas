@@ -63,6 +63,16 @@ public class Puntaje {
  		String puntaje = "" + Tablero.puntaje;
  		g2d.drawString(puntaje, 600, 417);
  		
+ 		//cuadrado para instrucciones
+ 		g2d.setColor(new Color(0, 0, 0));
+ 		g2d.fillRect(540, 60, 225, 75);
+ 		g2d.setColor(new Color(222, 27, 82));
+ 		g2d.drawRect(540, 60, 225, 75);
+ 		g2d.setFont(new Font("Rubik", Font.PLAIN, 17));
+ 		String mensaje =  "Presiona P para pausar";
+ 		String mensaje2 = "y Enter para seguir jugando";
+ 		g2d.drawString(mensaje, 550, 88);
+ 		g2d.drawString(mensaje2, 550, 110);
  	}
 	
 	
