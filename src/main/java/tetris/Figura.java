@@ -39,40 +39,7 @@ public abstract class Figura implements Dibujable {
 		}
 	}
 
-//	public void figuraRotar() throws ArrayIndexOutOfBoundsException {
-//		//seguir probando acá
-//		try {
-//			int tamanio = matrizFigura.length;
-//			int[][] nuevaMatriz = new int[tamanio][tamanio];
-//			
-//			if (posicionX >= 0 && posicionX < 8) {
-//	
-//			    for (int x=0;x<tamanio;x++) {
-//			        for (int y=0;y<tamanio;y++) {
-//			            nuevaMatriz[tamanio-1-x][y] = matrizFigura[y][x];
-//			        }
-//				}
-//			    matrizFigura = nuevaMatriz;
-//				    
-//			} else {
-//				
-//				System.out.println("posicion x: " + posicionX);
-//	
-//				posicionX = posicionX+2;
-//				//posicionY = posicionY+1;
-//				//moverseDerecha();
-//				for (int x=0;x<tamanio;x++) {
-//					for (int y=0;y<tamanio;y++) {
-//			            nuevaMatriz[tamanio-1-x][y] = matrizFigura[y][x];
-//			        }
-//			    }
-//			    matrizFigura = nuevaMatriz;
-//			}
-//				
-//		} catch (ArrayIndexOutOfBoundsException exception) {
-//            System.out.println("no se puede mover la pieza");
-//        }
-//	}
+
 
 	public void rotar() {
 		matrizFigura = obtenerProximaRotacion();
