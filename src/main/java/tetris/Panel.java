@@ -130,7 +130,7 @@
 
  private void actualizarAmbiente() {
      if (pantalla == GAME_SCREEN) {
- 			//40 Veces 25 milisegundos es un segundo. Entonces cada 1 segundo cae la figura.
+ 		//40 Veces 25 milisegundos es un segundo. Entonces cada 1 segundo cae la figura.
  	    if (Tablero.level == 1) {
 	 	    if(contadorTiempoCaida == 40) {
 	 		    contadorTiempoCaida = 0;
@@ -138,7 +138,7 @@
 	 		        tablero.actualizar();
 	 	        }
 	        }
-	 			contadorTiempoCaida++;
+	 		contadorTiempoCaida++;
  		} else if (Tablero.level == 2) {
  		    if(contadorTiempoCaida == 20) {
  	 		    contadorTiempoCaida = 0;
@@ -166,8 +166,7 @@
  	  }
  }
 
-
- 		if (pantalla == GAME_SCREEN && tablero.gameOver == false) {
+        if (pantalla == GAME_SCREEN && tablero.gameOver == false) {
  			contarTiempo();
  		}
  } 
@@ -209,11 +208,11 @@
          if (arg0.getKeyCode() == KeyEvent.VK_R && tablero.gameOver == true) {
         	actualizarAmbiente();
         	repintar();
-        	// faltaria agregar que limpie el panel para volver a jugar
-           	pantalla = WELCOME_SCREEN; 
+        	pantalla = WELCOME_SCREEN; 
+           	tablero = new Tablero(new ConversoDeImagen("/imagenes/"));
            	tablero.gameOver = false;
            	
-           }
+         }
          
   }
  	
