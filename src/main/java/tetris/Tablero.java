@@ -71,7 +71,7 @@ public class Tablero implements Dibujable {
 				if (gameOver == false && gamePause == false) {
 					figuraActual = proximaFigura;
 					figuraActual.setPosicionX(2);
-					figuraActual.setPosicionY(1); 
+					figuraActual.setPosicionY(0); 
 					proximaFigura = creadorDeFiguras.crearUnaFigura();
 					proximaFigura.setPosicionX(10);
 					proximaFigura.setPosicionY(3);
